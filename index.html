@@ -3,395 +3,938 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI를 현업 안으로</title>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <title>AI를 현업 안으로 — AI링커·ACE 제도 안내</title>
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      /* 메인 컬러 */
+      --blue: #1558e8;
+      --blue-deep: #0b2da5;
+      --blue-ink: #0a1a4a;
+      --violet: #5326e0;
+      --violet-deep: #3210b7;
+      --violet-soft: #efeaff;
+      --violet-line: #d6cbff;
+      --cyan: #0ba6c4;
+      --cyan-deep: #088ba6;
+      --cyan-bright: #22c8e0;
+      --cyan-soft: #e8fbff;
+      --cyan-line: #b9eafb;
+
+      /* 텍스트 */
+      --ink: #111827;
+      --ink-soft: #2b3344;
+      --muted: #485365;
+
+      /* 배경/카드 */
+      --card: #ffffff;
+      --shadow-card: 0 16px 36px rgba(20, 30, 80, 0.07);
+      --shadow-soft: 0 8px 20px rgba(20, 30, 80, 0.05);
+
+      --radius-xl: 26px;
+      --radius-lg: 20px;
+      --max: 1060px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+    }
 
     body {
-      font-family: 'Noto Sans KR', sans-serif;
-      background: #f0f2f8;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
       min-height: 100vh;
-      padding: 32px 16px;
+      color: var(--ink);
+      font-family: "Pretendard", "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background:
+        radial-gradient(circle at 50% -10%, rgba(21, 88, 232, 0.07), transparent 30rem),
+        radial-gradient(circle at 90% 8%, rgba(83, 38, 224, 0.05), transparent 22rem),
+        linear-gradient(180deg, #ffffff 0%, #f7faff 100%);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
-    .card {
-      background: #ffffff;
-      width: 100%;
-      max-width: 760px;
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 0 8px 40px rgba(60, 80, 180, 0.10);
-      padding: 44px 48px 36px;
+    a { color: inherit; text-decoration: none; }
+
+    .page {
+      width: min(var(--max), calc(100% - 40px));
+      margin: 0 auto;
+      padding: clamp(28px, 5vw, 64px) 0 28px;
     }
 
-    /* ── 상단 헤더 ── */
-    .top-label {
+    /* ───── 상단 라벨 ───── */
+    .top-kicker {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
-      color: #5a6a8a;
-      font-size: 13px;
-      letter-spacing: 0.02em;
-      margin-bottom: 14px;
-    }
-    .top-label::before,
-    .top-label::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: #c8cfe0;
+      gap: clamp(14px, 3vw, 30px);
+      color: var(--ink);
+      font-size: clamp(16px, 2vw, 24px);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      text-align: center;
+      margin-bottom: clamp(18px, 3vw, 28px);
     }
 
-    .main-title {
-      text-align: center;
-      font-size: clamp(42px, 8vw, 64px);
-      font-weight: 900;
-      color: #1a1e3a;
-      letter-spacing: -0.02em;
-      line-height: 1.15;
-      margin-bottom: 14px;
+    .top-kicker::before,
+    .top-kicker::after {
+      content: "";
+      width: clamp(52px, 12vw, 130px);
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #2a4fd8);
+      border-radius: 999px;
     }
-    .main-title .ai-gradient {
-      background: linear-gradient(135deg, #3a4fd4 0%, #6c3fc5 100%);
+    .top-kicker::after { background: linear-gradient(90deg, #2a4fd8, transparent); }
+
+    /* ───── 히어로 타이틀 ───── */
+    .hero {
+      text-align: center;
+      margin-bottom: clamp(28px, 4vw, 44px);
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(56px, 11vw, 112px);
+      line-height: 1.0;
+      font-weight: 900;
+      letter-spacing: -0.075em;
+      background: linear-gradient(90deg, #1f4cd9 0%, #16258a 45%, #0a1240 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-subtitle {
+      margin: clamp(20px, 3.5vw, 36px) auto 0;
+      font-size: clamp(19px, 2.6vw, 30px);
+      line-height: 1.45;
+      font-weight: 700;
+      letter-spacing: -0.05em;
+      color: var(--ink-soft);
+    }
+    .hero-subtitle strong {
+      color: var(--blue);
+      font-weight: 900;
+    }
+
+    /* ───── 카드 공통 ───── */
+    .intro-card,
+    .role-card {
+      position: relative;
+      overflow: hidden;
+      background: var(--card);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-card);
+    }
+
+    /* ───── 안내 카드 ───── */
+    .intro-card {
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      gap: clamp(18px, 3vw, 34px);
+      align-items: center;
+      border: 2px solid var(--violet-line);
+      padding: clamp(24px, 4vw, 40px);
+      margin-bottom: clamp(20px, 3vw, 28px);
+    }
+
+    .icon-stage {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 140px;
+      height: 140px;
+      justify-self: center;
+      cursor: pointer;
+    }
+
+    .icon-stage .emoji {
+      font-size: 96px;
+      line-height: 1;
+      display: inline-block;
+      transform-origin: 50% 70%;
+      transition: transform 0.45s cubic-bezier(0.22, 1.4, 0.36, 1),
+                  filter 0.35s ease;
+      filter: drop-shadow(0 8px 14px rgba(75, 32, 200, 0.18));
+      user-select: none;
+    }
+
+    /* 호버 시 흔드는 메가폰 */
+    .icon-stage.megaphone:hover .emoji,
+    .icon-stage.megaphone:focus-visible .emoji {
+      animation: megaShake 0.9s cubic-bezier(0.36, 0.07, 0.19, 0.97) infinite;
+    }
+
+    @keyframes megaShake {
+      0%   { transform: rotate(-6deg) translateY(-2px) scale(1.06); }
+      25%  { transform: rotate(2deg) translateY(-4px) scale(1.08); }
+      50%  { transform: rotate(-4deg) translateY(-2px) scale(1.07); }
+      75%  { transform: rotate(3deg) translateY(-5px) scale(1.09); }
+      100% { transform: rotate(-6deg) translateY(-2px) scale(1.06); }
+    }
+
+    /* 음파 링 */
+    .icon-stage .wave {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .icon-stage .wave::before,
+    .icon-stage .wave::after {
+      content: "";
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 60%; height: 60%;
+      border: 2px solid rgba(83, 38, 224, 0.35);
+      border-radius: 50%;
+      transform: translate(-50%, -50%) scale(0.6);
+      animation: ripple 1.6s ease-out infinite;
+    }
+    .icon-stage .wave::after { animation-delay: 0.8s; }
+    .icon-stage:hover .wave,
+    .icon-stage:focus-visible .wave { opacity: 1; }
+
+    @keyframes ripple {
+      0%   { transform: translate(-50%, -50%) scale(0.55); opacity: 0.7; }
+      80%  { opacity: 0.05; }
+      100% { transform: translate(-50%, -50%) scale(1.35); opacity: 0; }
+    }
+
+    .intro-copy { min-width: 0; }
+
+    .intro-card p {
+      margin: 0;
+      font-size: clamp(17px, 2.2vw, 24px);
+      line-height: 1.6;
+      font-weight: 600;
+      letter-spacing: -0.04em;
+      word-break: keep-all;
+      color: var(--ink-soft);
+    }
+    .intro-card p + p { margin-top: 4px; }
+
+    /* 버튼 row */
+    .button-row {
+      display: flex;
+      gap: clamp(14px, 3vw, 24px);
+      flex-wrap: wrap;
+      margin-top: clamp(22px, 3.5vw, 30px);
+    }
+
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      min-height: 64px;
+      padding: 0 clamp(20px, 3.5vw, 32px);
+      border: 2px solid var(--violet-line);
+      border-radius: 40px;
+      background: #fff;
+      color: var(--violet-deep);
+      font-size: clamp(16px, 2vw, 22px);
+      font-weight: 800;
+      letter-spacing: -0.045em;
+      box-shadow: 0 6px 16px rgba(43, 22, 150, 0.07);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .cta:hover {
+      transform: translateY(-2px);
+      border-color: #9a82f0;
+      box-shadow: 0 14px 28px rgba(43, 22, 150, 0.14);
+      background: #faf8ff;
+    }
+
+    .cta .badge {
+      display: grid;
+      place-items: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #3010b7, #6c40e9);
+      color: #fff;
+      font-size: 18px;
+      flex: 0 0 auto;
+      transition: transform 0.3s ease;
+    }
+    .cta:hover .badge { transform: scale(1.1) rotate(-6deg); }
+
+    .cta .badge.doc {
+      background: transparent;
+      color: var(--violet-deep);
+      font-size: 26px;
+    }
+    .cta:hover .badge.doc { transform: translateY(-2px) rotate(-4deg); }
+
+    .cta .small { font-size: 0.78em; font-weight: 700; margin-left: 2px; opacity: 0.85; }
+
+    .arrow {
+      width: 12px;
+      height: 12px;
+      border-right: 3px solid currentColor;
+      border-top: 3px solid currentColor;
+      transform: rotate(45deg);
+      margin-left: 6px;
+      border-radius: 2px;
+      opacity: 0.85;
+      flex: 0 0 auto;
+      transition: transform 0.25s ease, margin-left 0.25s ease;
+    }
+    .cta:hover .arrow { transform: rotate(45deg) translate(2px, -2px); margin-left: 10px; }
+
+    /* ───── 역할 카드 리스트 ───── */
+    .role-list {
+      display: grid;
+      gap: clamp(20px, 3vw, 26px);
+      margin-bottom: clamp(24px, 4vw, 34px);
+    }
+
+    .role-card {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      min-height: 220px;
+      border: 2px solid var(--violet-line);
+    }
+    .role-card.ace { border-color: var(--cyan-line); }
+
+    .role-visual {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: linear-gradient(135deg, rgba(83, 38, 224, 0.05) 0%, rgba(255,255,255,0) 70%);
+      overflow: hidden;
+    }
+    .role-card.ace .role-visual {
+      background: linear-gradient(135deg, rgba(11, 166, 196, 0.06) 0%, rgba(255,255,255,0) 70%);
+    }
+
+    /* 좌상단 번호 뱃지 */
+    .role-number {
+      position: absolute;
+      left: 18px;
+      top: 18px;
+      width: 50px;
+      height: 50px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      color: #fff;
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: -0.05em;
+      background: linear-gradient(135deg, #6d3dec, #3210b7);
+      box-shadow: 0 8px 18px rgba(74, 32, 200, 0.22);
+      z-index: 2;
+    }
+    .role-card.ace .role-number {
+      background: linear-gradient(135deg, #1bcae3, #088ba6);
+      box-shadow: 0 8px 18px rgba(8, 139, 166, 0.22);
+    }
+
+    /* 역할 카드 아이콘 스테이지 */
+    .role-icon-stage {
+      position: relative;
+      width: 180px;
+      height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .role-icon-stage .emoji-main {
+      font-size: 96px;
+      line-height: 1;
+      display: inline-block;
+      transform-origin: 50% 60%;
+      transition: transform 0.5s cubic-bezier(0.22, 1.4, 0.36, 1),
+                  filter 0.4s ease;
+      filter: drop-shadow(0 10px 18px rgba(75, 32, 200, 0.18));
+      user-select: none;
+    }
+    .role-card.ace .role-icon-stage .emoji-main {
+      filter: drop-shadow(0 10px 18px rgba(8, 139, 166, 0.20));
+    }
+
+    /* 작은 위성 이모지 (링커 카드) */
+    .satellite {
+      position: absolute;
+      font-size: 28px;
+      line-height: 1;
+      opacity: 0.85;
+      transition: transform 0.55s cubic-bezier(0.22, 1.4, 0.36, 1), opacity 0.4s ease;
+      pointer-events: none;
+      filter: drop-shadow(0 4px 8px rgba(83, 38, 224, 0.18));
+    }
+    .satellite.s1 { top: 8%;  left: 6%; }
+    .satellite.s2 { top: 8%;  right: 6%; }
+    .satellite.s3 { bottom: 8%; left: 6%; }
+    .satellite.s4 { bottom: 8%; right: 6%; }
+
+    /* 링커 카드 호버 효과 */
+    .role-card.linker .role-icon-stage:hover .emoji-main,
+    .role-card.linker .role-icon-stage:focus-visible .emoji-main {
+      transform: scale(1.12) rotate(-4deg);
+      filter: drop-shadow(0 14px 22px rgba(75, 32, 200, 0.30));
+    }
+    .role-card.linker .role-icon-stage:hover .satellite.s1 { transform: translate(-8px, -8px) scale(1.15); }
+    .role-card.linker .role-icon-stage:hover .satellite.s2 { transform: translate(8px, -8px) scale(1.15); }
+    .role-card.linker .role-icon-stage:hover .satellite.s3 { transform: translate(-8px, 8px) scale(1.15); }
+    .role-card.linker .role-icon-stage:hover .satellite.s4 { transform: translate(8px, 8px) scale(1.15); }
+
+    /* 연결선 SVG (링커 카드 호버 시 표시) */
+    .connect-lines {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    .role-card.linker .role-icon-stage:hover .connect-lines,
+    .role-card.linker .role-icon-stage:focus-visible .connect-lines {
+      opacity: 1;
+    }
+    .connect-lines line {
+      stroke: #8b6def;
+      stroke-width: 2;
+      stroke-dasharray: 4 5;
+      stroke-linecap: round;
+      animation: dash 1.2s linear infinite;
+    }
+    @keyframes dash {
+      to { stroke-dashoffset: -18; }
+    }
+
+    /* ACE 카드 호버 (과녁이 펄스하며 회전, 주변에 반짝임) */
+    .role-card.ace .role-icon-stage:hover .emoji-main,
+    .role-card.ace .role-icon-stage:focus-visible .emoji-main {
+      animation: targetPulse 1.4s ease-in-out infinite;
+      filter: drop-shadow(0 14px 22px rgba(8, 139, 166, 0.32));
+    }
+    @keyframes targetPulse {
+      0%, 100% { transform: scale(1.06) rotate(-3deg); }
+      50%      { transform: scale(1.14) rotate(3deg); }
+    }
+
+    /* 과녁 주변 반짝임 (4방향) */
+    .sparkle {
+      position: absolute;
+      font-size: 22px;
+      line-height: 1;
+      opacity: 0;
+      pointer-events: none;
+      filter: drop-shadow(0 2px 6px rgba(34, 200, 224, 0.4));
+      transition: opacity 0.3s ease;
+    }
+    .sparkle.sp1 { top: 12%;  left: 10%; animation: twinkle 1.6s ease-in-out infinite 0.0s; }
+    .sparkle.sp2 { top: 16%;  right: 8%; animation: twinkle 1.6s ease-in-out infinite 0.4s; }
+    .sparkle.sp3 { bottom: 14%; left: 14%; animation: twinkle 1.6s ease-in-out infinite 0.8s; }
+    .sparkle.sp4 { bottom: 10%; right: 12%; animation: twinkle 1.6s ease-in-out infinite 1.2s; }
+
+    .role-card.ace .role-icon-stage:hover .sparkle,
+    .role-card.ace .role-icon-stage:focus-visible .sparkle {
+      opacity: 1;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { transform: scale(0.6) rotate(0deg); opacity: 0.35; }
+      50%      { transform: scale(1.15) rotate(20deg); opacity: 1; }
+    }
+
+    /* 과녁 동심원 확산 (ripple) */
+    .target-ring {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 100px; height: 100px;
+      border: 2px solid rgba(11, 166, 196, 0.55);
+      border-radius: 50%;
+      transform: translate(-50%, -50%) scale(0.4);
+      opacity: 0;
+      pointer-events: none;
+    }
+    .role-card.ace .role-icon-stage:hover .target-ring,
+    .role-card.ace .role-icon-stage:focus-visible .target-ring {
+      animation: targetRing 1.8s ease-out infinite;
+    }
+    .role-card.ace .role-icon-stage:hover .target-ring.r2,
+    .role-card.ace .role-icon-stage:focus-visible .target-ring.r2 {
+      animation-delay: 0.9s;
+    }
+    @keyframes targetRing {
+      0%   { transform: translate(-50%, -50%) scale(0.35); opacity: 0.7; }
+      80%  { opacity: 0.05; }
+      100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; }
+    }
+
+    /* 역할 카드 텍스트 */
+    .role-copy {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(28px, 4vw, 44px) clamp(24px, 4vw, 40px);
+      min-width: 0;
+    }
+
+    .role-title {
+      display: flex;
+      align-items: baseline;
+      gap: clamp(14px, 2.5vw, 22px);
+      margin-bottom: clamp(16px, 2.5vw, 22px);
+      flex-wrap: wrap;
+    }
+
+    .role-title h2 {
+      margin: 0;
+      color: var(--violet);
+      font-size: clamp(38px, 5.5vw, 58px);
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: -0.07em;
+      white-space: nowrap;
+    }
+    .role-card.ace .role-title h2 {
+      color: var(--cyan);
+      background: linear-gradient(135deg, #22c8e0 0%, #088ba6 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
 
-    .subtitle {
-      text-align: center;
-      font-size: 17px;
-      color: #4a5368;
-      line-height: 1.65;
-      margin-bottom: 28px;
+    .role-title .divider {
+      width: 2px;
+      height: clamp(28px, 3.5vw, 38px);
+      background: #aaa1d8;
+      flex: 0 0 auto;
     }
-    .subtitle .highlight {
-      color: #3a4fd4;
+    .role-card.ace .role-title .divider { background: #88c7d4; }
+
+    .role-title .role-sub {
+      margin: 0;
+      color: var(--violet-deep);
+      font-size: clamp(15px, 1.8vw, 21px);
+      line-height: 1.3;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      word-break: keep-all;
+    }
+    .role-card.ace .role-title .role-sub { color: var(--cyan-deep); }
+
+    .role-desc {
+      margin: 0;
+      font-size: clamp(19px, 2.5vw, 27px);
+      line-height: 1.5;
       font-weight: 700;
+      letter-spacing: -0.045em;
+      word-break: keep-all;
+      color: var(--ink);
     }
 
-    /* ── 안내 박스 ── */
-    .info-box {
-      border: 1.5px solid #d0d6f0;
-      border-radius: 14px;
-      padding: 20px 22px 18px;
-      margin-bottom: 16px;
+    /* ───── 하단 다크 배너 ───── */
+    .bottom-banner {
+      display: grid;
+      grid-template-columns: 140px 1fr auto;
+      gap: clamp(18px, 3vw, 28px);
+      align-items: center;
+      padding: clamp(22px, 4vw, 36px) clamp(22px, 4vw, 40px);
+      border-radius: 24px;
+      color: #fff;
+      background:
+        radial-gradient(circle at 18% 50%, rgba(41, 223, 243, 0.30), transparent 18rem),
+        radial-gradient(circle at 85% 0%, rgba(118, 60, 240, 0.30), transparent 16rem),
+        linear-gradient(135deg, #2710a8 0%, #0a2e8f 60%, #0b1f6a 100%);
+      box-shadow: 0 18px 36px rgba(12, 30, 100, 0.22);
+      margin-bottom: clamp(18px, 3vw, 24px);
     }
 
-    .info-box p {
-      font-size: 15px;
-      color: #3a4368;
-      line-height: 1.7;
-      margin-bottom: 16px;
-    }
-    .info-box p strong { font-weight: 700; }
-
-    .btn-row {
-      display: flex;
-      gap: 10px;
-    }
-
-    .btn-link {
-      flex: 1;
+    .banner-icon {
+      position: relative;
+      width: 130px;
+      height: 110px;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 7px;
-      padding: 13px 12px;
-      border: 1.5px solid #c8cfe0;
-      border-radius: 50px;
-      font-size: 15px;
-      font-weight: 700;
-      color: #1a1e3a;
-      text-decoration: none;
-      transition: background 0.18s, border-color 0.18s, color 0.18s;
       cursor: pointer;
-      background: #fff;
     }
-    .btn-link:hover {
-      background: #f0f3ff;
-      border-color: #3a4fd4;
-      color: #3a4fd4;
+    .banner-icon .emoji {
+      font-size: 78px;
+      line-height: 1;
+      transform-origin: 50% 70%;
+      transition: transform 0.4s cubic-bezier(0.22, 1.4, 0.36, 1);
+      filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.30));
+      user-select: none;
+      display: inline-block;
     }
-    .btn-link .icon {
-      width: 22px;
-      height: 22px;
-      background: #1a1e3a;
+
+    /* 로켓 살짝 기울인 기본 자세 */
+    .banner-icon .emoji.rocket {
+      transform: rotate(-18deg);
+    }
+
+    /* 호버 시 위로 발사 */
+    .banner-icon:hover .emoji.rocket,
+    .banner-icon:focus-visible .emoji.rocket {
+      animation: rocketLaunch 1.4s cubic-bezier(0.36, 0.07, 0.19, 0.97) infinite;
+    }
+    @keyframes rocketLaunch {
+      0%   { transform: rotate(-18deg) translate(0, 0); }
+      25%  { transform: rotate(-22deg) translate(-2px, -8px); }
+      55%  { transform: rotate(-15deg) translate(3px, -14px) scale(1.06); }
+      80%  { transform: rotate(-20deg) translate(-1px, -6px); }
+      100% { transform: rotate(-18deg) translate(0, 0); }
+    }
+
+    /* 로켓 발사 연기 (작은 입자들) */
+    .smoke {
+      position: absolute;
+      bottom: 14%;
+      left: 38%;
+      width: 8px;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.85);
       border-radius: 50%;
-      display: flex;
+      opacity: 0;
+      pointer-events: none;
+      filter: blur(1px);
+    }
+    .smoke.s1 { left: 38%; }
+    .smoke.s2 { left: 46%; animation-delay: 0.3s !important; }
+    .smoke.s3 { left: 30%; animation-delay: 0.6s !important; }
+
+    .banner-icon:hover .smoke,
+    .banner-icon:focus-visible .smoke {
+      animation: smokePuff 1.4s ease-out infinite;
+    }
+    @keyframes smokePuff {
+      0%   { transform: translateY(0) scale(0.5); opacity: 0.0; }
+      30%  { transform: translateY(8px) scale(1); opacity: 0.7; }
+      100% { transform: translateY(28px) scale(1.6); opacity: 0; }
+    }
+
+    /* 별빛 배경 (호버 시) */
+    .banner-icon .wave {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .banner-icon .wave::before,
+    .banner-icon .wave::after {
+      content: "";
+      position: absolute;
+      top: 38%; left: 50%;
+      width: 56%; height: 56%;
+      border: 2px solid rgba(72, 230, 255, 0.55);
+      border-radius: 50%;
+      transform: translate(-50%, -50%) scale(0.5);
+      animation: ripple 1.8s ease-out infinite;
+    }
+    .banner-icon .wave::after { animation-delay: 0.9s; }
+    .banner-icon:hover .wave,
+    .banner-icon:focus-visible .wave { opacity: 1; }
+
+    .bottom-copy h3 {
+      margin: 0 0 10px;
+      font-size: clamp(22px, 3vw, 34px);
+      line-height: 1.2;
+      font-weight: 900;
+      letter-spacing: -0.055em;
+    }
+
+    .bottom-copy p {
+      margin: 0;
+      font-size: clamp(15px, 1.9vw, 21px);
+      line-height: 1.5;
+      font-weight: 600;
+      letter-spacing: -0.04em;
+      word-break: keep-all;
+      color: rgba(255, 255, 255, 0.92);
+    }
+    .bottom-copy p + p { margin-top: 2px; }
+    .bottom-copy .mint {
+      color: #48e6ff;
+      font-weight: 900;
+    }
+
+    .playground-btn {
+      display: inline-flex;
       align-items: center;
       justify-content: center;
-      flex-shrink: 0;
-      transition: background 0.18s;
-    }
-    .btn-link:hover .icon { background: #3a4fd4; }
-    .btn-link .icon svg { width: 11px; height: 11px; fill: #fff; }
-    .btn-link .arrow { font-size: 12px; color: #8890aa; margin-left: 2px; }
-
-    /* ── 섹션 01 · 02 ── */
-    .section-box {
-      border: 1.5px solid #d0d6f0;
-      border-radius: 14px;
-      padding: 20px 22px;
-      margin-bottom: 16px;
-      display: flex;
-      flex-direction: row;
-      align-items: flex-start;
       gap: 14px;
-    }
-    .section-box.teal { border-color: #b2e8e4; }
-
-    .section-num {
-      flex-shrink: 0;
-      font-size: 12px;
+      min-width: 180px;
+      min-height: 78px;
+      padding: 12px 26px;
+      border-radius: 22px;
+      color: var(--violet-deep);
+      background: #ffffff;
+      font-size: clamp(17px, 2vw, 22px);
       font-weight: 900;
-      color: #fff;
-      background: #3a4fd4;
-      border-radius: 8px;
-      padding: 3px 9px;
-      margin-top: 6px;
+      letter-spacing: -0.05em;
+      text-align: center;
+      line-height: 1.25;
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.18);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
-    .section-box.teal .section-num { background: #1bbfb0; }
-
-    .section-icon {
-      flex-shrink: 0;
-      width: 80px;
-      height: 80px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-top: -2px;
+    .playground-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 20px 36px rgba(0, 0, 0, 0.24);
     }
-    .section-icon svg { width: 80px; height: 80px; }
-
-    .section-body { flex: 1; }
-
-    .section-title-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 10px;
-      flex-wrap: wrap;
-    }
-    .section-title-row .name {
-      font-size: 30px;
-      font-weight: 900;
-      color: #2a3060;
-      letter-spacing: -0.01em;
-    }
-    .section-title-row .name.teal { color: #1bbfb0; }
-    .divider { width: 2px; height: 18px; background: #c8cfe0; border-radius: 2px; flex-shrink: 0; }
-    .section-title-row .role {
-      font-size: 12px;
-      color: #6878a8;
-      font-weight: 500;
-      line-height: 1.4;
+    .playground-btn .arrow {
+      border-color: var(--violet-deep);
     }
 
-    .section-desc {
-      font-size: 17px;
-      font-weight: 700;
-      color: #1a1e3a;
-      line-height: 1.75;
-    }
-
-    /* ── CTA 배너 ── */
-    .cta-banner {
-      background: linear-gradient(135deg, #2a3580 0%, #1a2060 100%);
-      border-radius: 14px;
-      padding: 22px 20px;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      margin-bottom: 20px;
-    }
-    .cta-icon { flex-shrink: 0; font-size: 32px; }
-    .cta-text { flex: 1; }
-    .cta-text .cta-title {
-      font-size: 17px;
-      font-weight: 900;
-      color: #fff;
-      margin-bottom: 5px;
-    }
-    .cta-text .cta-sub {
-      font-size: 13.5px;
-      color: #a0b0e0;
-      line-height: 1.6;
-    }
-    .cta-text .cta-sub .cta-hl { color: #7dd4f8; }
-
-    /* ★★★ LINK 3 - PlayGround 바로가기 ★★★ */
-    .cta-btn {
-      flex-shrink: 0;
-      background: #fff;
-      border-radius: 10px;
-      padding: 12px 18px;
-      font-size: 14px;
-      font-weight: 900;
-      color: #1a2060;
-      text-decoration: none;
-      white-space: nowrap;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      transition: opacity 0.18s;
-    }
-    .cta-btn:hover { opacity: 0.85; }
-    .cta-btn .cta-btn-arrow { font-size: 14px; color: #8890aa; }
-
-    /* ── 하단 ── */
+    /* ───── 푸터 ───── */
     .footer {
       text-align: center;
-      font-size: 12px;
-      color: #8890aa;
-      letter-spacing: 0.05em;
+      color: #5a6478;
+      font-size: clamp(14px, 1.6vw, 18px);
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      margin-top: 18px;
+    }
+
+    /* ───── 반응형 ───── */
+    @media (max-width: 860px) {
+      .intro-card {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .icon-stage { width: 120px; height: 120px; }
+      .icon-stage .emoji { font-size: 80px; }
+
+      .button-row { justify-content: center; }
+
+      .role-card {
+        grid-template-columns: 1fr;
+      }
+      .role-visual {
+        min-height: 180px;
+        padding: 40px 20px 24px;
+      }
+      .role-icon-stage { width: 160px; height: 130px; }
+      .role-icon-stage .emoji-main { font-size: 80px; }
+
+      .bottom-banner {
+        grid-template-columns: 100px 1fr;
+      }
+      .banner-icon { width: 100px; height: 90px; }
+      .banner-icon .emoji { font-size: 68px; }
+      .playground-btn {
+        grid-column: 1 / -1;
+        justify-self: stretch;
+        min-height: 64px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .top-kicker { gap: 10px; font-size: 15px; }
+      .top-kicker::before, .top-kicker::after { width: 44px; }
+
+      .hero h1 { font-size: clamp(46px, 16vw, 70px); }
+      .hero-subtitle { font-size: 17px; }
+
+      .intro-card,
+      .role-card,
+      .bottom-banner { border-radius: 18px; }
+
+      .intro-card { padding: 22px 18px; }
+      .intro-card p { font-size: 15.5px; line-height: 1.55; }
+
+      .cta {
+        width: 100%;
+        min-height: 56px;
+        padding: 0 18px;
+        border-radius: 30px;
+        font-size: 16px;
+      }
+      .cta .badge { width: 34px; height: 34px; font-size: 15px; }
+      .cta .badge.doc { font-size: 22px; }
+
+      .role-number {
+        left: 14px; top: 14px;
+        width: 42px; height: 42px;
+        border-radius: 12px;
+        font-size: 18px;
+      }
+
+      .role-title { gap: 10px 14px; }
+      .role-title h2 { font-size: 36px; }
+      .role-title .divider { height: 28px; }
+      .role-title .role-sub { font-size: 15px; }
+      .role-desc { font-size: 18px; }
+
+      .bottom-banner {
+        grid-template-columns: 76px 1fr;
+        gap: 12px;
+        padding: 20px 18px;
+      }
+      .banner-icon { width: 76px; height: 72px; }
+      .banner-icon .emoji { font-size: 54px; }
+      .bottom-copy h3 { font-size: 21px; }
+      .bottom-copy p { font-size: 14.5px; }
+    }
+
+    /* 터치 디바이스에서는 무한 애니메이션 비활성화 */
+    @media (hover: none) {
+      .icon-stage.megaphone:hover .emoji,
+      .banner-icon:hover .emoji {
+        animation: none;
+      }
+    }
+
+    /* 접근성: 모션 감소 선호 */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    @media print {
+      body { background: #fff; }
+      .page { width: 100%; max-width: 980px; padding: 18px 0; }
+      .intro-card, .role-card, .bottom-banner { box-shadow: none; }
     }
   </style>
 </head>
+
 <body>
-<div class="card">
+  <main class="page" aria-label="AI링커와 ACE 활동 안내">
 
-  <!-- 상단 라벨 -->
-  <div class="top-label">AI링커와 ACE 활동이 시작됩니다!</div>
+    <div class="top-kicker">AI링커와 ACE 활동이 시작됩니다!</div>
 
-  <!-- 메인 타이틀 -->
-  <h1 class="main-title"><span class="ai-gradient">AI</span>를 현업 안으로</h1>
-
-  <!-- 서브타이틀 -->
-  <p class="subtitle">
-    AI를 더 가까이, 더 실질적으로 활용하기 위한<br>
-    <span class="highlight">ACE · AI링커 제도</span>를 안내드립니다.
-  </p>
-
-  <!-- 안내 박스 -->
-  <div class="info-box">
-    <p>
-      <strong>AI를 더 가까이, 더 실질적으로 활용하기 위한 ACE · AI 링커 제도를 안내드립니다.</strong><br>
-      제도에 대한 이해를 돕기 위해 설명 영상과 상세 자료를 준비했습니다.
-    </p>
-    <div class="btn-row">
-
-      <!-- ★★★ LINK 1 - 설명 영상 바로가기 ★★★ -->
-      <a href="여기에_설명영상_링크_입력" class="btn-link" target="_blank" rel="noopener">
-        <span class="icon">
-          <svg viewBox="0 0 10 12"><polygon points="1,1 9,6 1,11"/></svg>
-        </span>
-        설명 영상&nbsp;<span style="font-weight:400;color:#6878a8">바로가기</span>
-        <span class="arrow">›</span>
-      </a>
-
-      <!-- ★★★ LINK 2 - 설명 자료 바로가기 ★★★ -->
-      <a href="https://anguk-staion.github.io/ACEAI2/" class="btn-link" target="_blank" rel="noopener">
-        <span class="icon">
-          <svg viewBox="0 0 12 14">
-            <rect x="1" y="1" width="10" height="12" rx="1.5" fill="none" stroke="#fff" stroke-width="1.5"/>
-            <line x1="3" y1="5" x2="9" y2="5" stroke="#fff" stroke-width="1.2"/>
-            <line x1="3" y1="7.5" x2="9" y2="7.5" stroke="#fff" stroke-width="1.2"/>
-            <line x1="3" y1="10" x2="7" y2="10" stroke="#fff" stroke-width="1.2"/>
-          </svg>
-        </span>
-        설명 자료&nbsp;<span style="font-weight:400;color:#6878a8">바로가기</span>
-        <span class="arrow">›</span>
-      </a>
-
-    </div>
-  </div>
-
-  <!-- 섹션 01 AI링커 -->
-  <div class="section-box">
-    <div class="section-num">01</div>
-    <div class="section-icon">
-      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="32" cy="32" r="11" fill="#6c3fc5"/>
-        <circle cx="32" cy="28" r="3.5" fill="#fff"/>
-        <path d="M24.5 39c0-4.1 3.4-7.5 7.5-7.5s7.5 3.4 7.5 7.5" stroke="#fff" stroke-width="2" stroke-linecap="round" fill="none"/>
-        <circle cx="13" cy="17" r="7" fill="#c4b5f4" opacity=".9"/>
-        <circle cx="51" cy="17" r="7" fill="#c4b5f4" opacity=".9"/>
-        <circle cx="13" cy="47" r="7" fill="#c4b5f4" opacity=".9"/>
-        <circle cx="51" cy="47" r="7" fill="#c4b5f4" opacity=".9"/>
-        <circle cx="13" cy="15" r="2.2" fill="#7c5cbf"/>
-        <path d="M9 22c0-2.2 1.8-4 4-4s4 1.8 4 4" stroke="#7c5cbf" stroke-width="1.4" stroke-linecap="round" fill="none"/>
-        <circle cx="51" cy="15" r="2.2" fill="#7c5cbf"/>
-        <path d="M47 22c0-2.2 1.8-4 4-4s4 1.8 4 4" stroke="#7c5cbf" stroke-width="1.4" stroke-linecap="round" fill="none"/>
-        <circle cx="13" cy="45" r="2.2" fill="#7c5cbf"/>
-        <path d="M9 52c0-2.2 1.8-4 4-4s4 1.8 4 4" stroke="#7c5cbf" stroke-width="1.4" stroke-linecap="round" fill="none"/>
-        <circle cx="51" cy="45" r="2.2" fill="#7c5cbf"/>
-        <path d="M47 52c0-2.2 1.8-4 4-4s4 1.8 4 4" stroke="#7c5cbf" stroke-width="1.4" stroke-linecap="round" fill="none"/>
-        <line x1="20" y1="21" x2="26" y2="26" stroke="#9b7ee0" stroke-width="1.5" stroke-dasharray="3 2"/>
-        <line x1="44" y1="21" x2="38" y2="26" stroke="#9b7ee0" stroke-width="1.5" stroke-dasharray="3 2"/>
-        <line x1="20" y1="43" x2="26" y2="38" stroke="#9b7ee0" stroke-width="1.5" stroke-dasharray="3 2"/>
-        <line x1="44" y1="43" x2="38" y2="38" stroke="#9b7ee0" stroke-width="1.5" stroke-dasharray="3 2"/>
-      </svg>
-    </div>
-    <div class="section-body">
-      <div class="section-title-row">
-        <span class="name">AI링커</span>
-        <span class="divider"></span>
-        <span class="role">현업과 AI를 연결하는 옆자리 전파 담당자</span>
-      </div>
-      <p class="section-desc">
-        단위 조직에서 AI를 먼저 써보고<br>
-        활용 사례와 업무 니즈를 발굴 · 공유합니다.
+    <!-- ───── 히어로 ───── -->
+    <section class="hero">
+      <h1>AI를 현업 안으로</h1>
+      <p class="hero-subtitle">
+        AI를 더 가까이, 더 실질적으로 활용하기 위한<br />
+        <strong>ACE · AI링커 제도</strong>를 안내드립니다.
       </p>
-    </div>
-  </div>
+    </section>
 
-  <!-- 섹션 02 ACE -->
-  <div class="section-box teal">
-    <div class="section-num">02</div>
-    <div class="section-icon">
-      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="32" cy="36" r="22" fill="#b2f0ea" opacity=".45"/>
-        <circle cx="32" cy="36" r="15" fill="#3ecfc5" opacity=".55"/>
-        <circle cx="32" cy="36" r="8"  fill="#1bbfb0"/>
-        <circle cx="32" cy="36" r="3"  fill="#fff"/>
-        <line x1="50" y1="10" x2="34" y2="33" stroke="#0fa898" stroke-width="2.5" stroke-linecap="round"/>
-        <polygon points="50,10 44,16 52,18" fill="#0fa898"/>
-        <line x1="50" y1="10" x2="53" y2="6"  stroke="#0fa898" stroke-width="1.8" stroke-linecap="round"/>
-        <line x1="48" y1="12" x2="51" y2="7"  stroke="#0fa898" stroke-width="1.8" stroke-linecap="round"/>
-      </svg>
-    </div>
-    <div class="section-body">
-      <div class="section-title-row">
-        <span class="name teal">ACE</span>
-        <span class="divider"></span>
-        <span class="role">본부 차원의 과제 추진 및 링커 활동 지원 리더</span>
+    <!-- ───── 안내 카드 ───── -->
+    <section class="intro-card" aria-label="설명 영상과 설명 자료 안내">
+      <div class="icon-stage megaphone" tabindex="0" aria-label="안내 아이콘">
+        <span class="wave" aria-hidden="true"></span>
+        <span class="emoji" role="img" aria-label="확성기">📢</span>
       </div>
-      <p class="section-desc">
-        본부 차원의 AI 과제를 추진하고<br>
-        AI 링커 활동을 지원 · 연결합니다.
-      </p>
-    </div>
-  </div>
 
-  <!-- CTA 배너 -->
-  <div class="cta-banner">
-    <div class="cta-icon">📢</div>
-    <div class="cta-text">
-      <div class="cta-title">AI는 함께할 때 더 강력해집니다!</div>
-      <div class="cta-sub">
-        AI링커와 ACE 활동에 많은 관심과 참여 부탁드립니다.<br>
-        <span class="cta-hl">PlayGround에서 다양한 소식과 참여를 함께 만나보세요.</span>
+      <div class="intro-copy">
+        <p>AI를 더 가까이, 더 실질적으로 활용하기 위한 ACE·AI링커 제도를 안내드립니다.</p>
+        <p>제도에 대한 이해를 돕기 위해 설명 영상과 상세 자료를 준비했습니다.</p>
+
+        <div class="button-row">
+          <!-- 링크 입력 위치: href="#" 값을 실제 설명 영상 링크로 교체하세요. -->
+          <a class="cta" href="#" aria-label="설명 영상 바로가기" style="opacity:0.45;pointer-events:none;cursor:default;">
+            <span class="badge" aria-hidden="true">▶</span>
+            설명 영상 <span class="small">바로가기</span><span class="arrow" aria-hidden="true"></span>
+          </a>
+
+          <!-- 링크 입력 위치: href="#" 값을 실제 설명 자료 링크로 교체하세요. -->
+          <a class="cta" href="https://anguk-staion.github.io/ACEAI2/" target="_blank" rel="noopener noreferrer" aria-label="설명 자료 바로가기">
+            <span class="badge doc" aria-hidden="true">📄</span>
+            설명 자료 <span class="small">바로가기</span><span class="arrow" aria-hidden="true"></span>
+          </a>
+        </div>
       </div>
-    </div>
+    </section>
 
-    <!-- ★★★ LINK 3 - PlayGround 바로가기 ★★★ -->
-    <a href="https://teams.microsoft.com/l/channel/19%3A1b51738e3b8448fab35322050c0047b2%40thread.tacv2/%F0%9F%8F%80%20%EC%9E%90%EC%9C%A0%EA%B2%8C%EC%8B%9C%ED%8C%90?groupId=43c83ad4-1ac0-44ad-8ab1-6729a6279fcb&tenantId=5fcb0def-a698-40ce-a73a-ea61130c13c6" class="cta-btn" target="_blank" rel="noopener">
-      PlayGround 바로가기 <span class="cta-btn-arrow">›</span>
-    </a>
+    <!-- ───── 역할 카드 ───── -->
+    <section class="role-list" aria-label="AI링커와 ACE 역할">
 
-  </div>
+      <!-- 01. AI링커 -->
+      <article class="role-card linker">
+        <div class="role-visual">
+          <span class="role-number" aria-label="첫 번째">01</span>
 
-  <!-- 하단 -->
-  <div class="footer">워크이노베이션센터 · AI디자인랩</div>
+          <div class="role-icon-stage" tabindex="0" aria-label="AI링커 아이콘">
+            <!-- 연결선 (호버 시 표시) -->
+            <svg class="connect-lines" viewBox="0 0 180 160" preserveAspectRatio="none" aria-hidden="true">
+              <line x1="90" y1="80" x2="20" y2="20"></line>
+              <line x1="90" y1="80" x2="160" y2="20"></line>
+              <line x1="90" y1="80" x2="20" y2="140"></line>
+              <line x1="90" y1="80" x2="160" y2="140"></line>
+            </svg>
 
-</div>
+            <span class="satellite s1" role="img" aria-label="사람">👤</span>
+            <span class="satellite s2" role="img" aria-label="사람">👤</span>
+            <span class="satellite s3" role="img" aria-label="사람">👤</span>
+            <span class="satellite s4" role="img" aria-label="사람">👤</span>
 
+            <span class="emoji-main" role="img" aria-label="연결 담당자">🧑‍💼</span>
+          </div>
+        </div>
 
+        <div class="role-copy">
+          <div class="role-title">
+            <h2>AI링커</h2>
+            <span class="divider" aria-hidden="true"></span>
+            <p class="role-sub">현업과 AI를 연결하는 옆자리 전파 담당자</p>
+          </div>
+          <p class="role-desc">각 조직에서 AI를 먼저 써보고<br />활용 사례와 업무 수요를 발굴·공유합니다</p>
+        </div>
+      </article>
+
+      <!-- 02. ACE -->
+      <article class="role-card ace">
+        <div class="role-visual">
+          <span class="role-number" aria-label="두 번째">02</span>
+
+          <div class="role-icon-stage" tabindex="0" aria-label="ACE 아이콘">
+            <span class="target-ring r1" aria-hidden="true"></span>
+            <span class="target-ring r2" aria-hidden="true"></span>
+            <span class="emoji-main" role="img" aria-label="과녁">🎯</span>
+            <span class="sparkle sp1" aria-hidden="true">✨</span>
+            <span class="sparkle sp2" aria-hidden="true">✨</span>
+            <span class="sparkle sp3" aria-hidden="true">✨</span>
+            <span class="sparkle sp4" aria-hidden="true">✨</span>
+          </div>
+        </div>
+
+        <div class="role-copy">
+          <div class="role-title">
+            <h2>ACE</h2>
+            <span class="divider" aria-hidden="true"></span>
+            <p class="role-sub">본부 차원의 과제 추진 및 링커 활동 지원 리더</p>
+          </div>
+          <p class="role-desc">본부 차원의 AI 과제를 추진하고<br />AI링커 활동을 지원·연결합니다</p>
+        </div>
+      </article>
+    </section>
+
+    <!-- ───── 하단 배너 ───── -->
+    <section class="bottom-banner" aria-label="PlayGround 바로가기">
+      <div class="banner-icon" tabindex="0" aria-label="PlayGround 안내 아이콘">
+        <span class="wave" aria-hidden="true"></span>
+        <span class="emoji rocket" role="img" aria-label="로켓">🚀</span>
+        <span class="smoke s1" aria-hidden="true"></span>
+        <span class="smoke s2" aria-hidden="true"></span>
+        <span class="smoke s3" aria-hidden="true"></span>
+      </div>
+
+      <div class="bottom-copy">
+        <h3>AI는 함께할 때 더 강력해집니다!</h3>
+        <p>AI링커와 ACE 활동에 많은 관심과 참여 부탁드립니다.</p>
+        <p><span class="mint">PlayGround</span>에서 다양한 소식과 참여를 함께 만나보세요.</p>
+      </div>
+
+      <!-- 링크 입력 위치: href="#" 값을 실제 PlayGround 링크로 교체하세요. -->
+      <a class="playground-btn" href="https://teams.microsoft.com/l/channel/19%3A1b51738e3b8448fab35322050c0047b2%40thread.tacv2/%F0%9F%8F%80%20%EC%9E%90%EC%9C%A0%EA%B2%8C%EC%8B%9C%ED%8C%90?groupId=43c83ad4-1ac0-44ad-8ab1-6729a6279fcb&tenantId=5fcb0def-a698-40ce-a73a-ea61130c13c6" target="_blank" rel="noopener noreferrer" aria-label="PlayGround 바로가기">
+        <span>PlayGround<br />바로가기</span><span class="arrow" aria-hidden="true"></span>
+      </a>
+    </section>
+
+    <footer class="footer">워크이노베이션센터 · AI디자인랩</footer>
+  </main>
 </body>
 </html>
