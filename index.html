@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI를 현업 안으로</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      background: #f0f2f8;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 32px 16px;
+    }
+
+    .card {
+      background: #ffffff;
+      width: 100%;
+      max-width: 760px;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 8px 40px rgba(60, 80, 180, 0.10);
+      padding: 44px 48px 36px;
+    }
+
+    /* ── 상단 헤더 ── */
+    .top-label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      color: #5a6a8a;
+      font-size: 13px;
+      letter-spacing: 0.02em;
+      margin-bottom: 14px;
+    }
+    .top-label::before,
+    .top-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #c8cfe0;
+    }
+
+    .main-title {
+      text-align: center;
+      font-size: clamp(42px, 8vw, 64px);
+      font-weight: 900;
+      color: #1a1e3a;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+    .main-title .ai-gradient {
+      background: linear-gradient(135deg, #3a4fd4 0%, #6c3fc5 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      text-align: center;
+      font-size: 17px;
+      color: #4a5368;
+      line-height: 1.65;
+      margin-bottom: 28px;
+    }
+    .subtitle .highlight {
+      color: #3a4fd4;
+      font-weight: 700;
+    }
+
+    /* ── 안내 박스 ── */
+    .info-box {
+      border: 1.5px solid #d0d6f0;
+      border-radius: 14px;
+      padding: 20px 22px 18px;
+      margin-bottom: 16px;
+    }
+
+    .info-box p {
+      font-size: 15px;
+      color: #3a4368;
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+    .info-box p strong { font-weight: 700; }
+
+    .btn-row {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn-link {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      padding: 13px 12px;
+      border: 1.5px solid #c8cfe0;
+      border-radius: 50px;
+      font-size: 15px;
+      font-weight: 700;
+      color: #1a1e3a;
+      text-decoration: none;
+      transition: background 0.18s, border-color 0.18s, color 0.18s;
+      cursor: pointer;
+      background: #fff;
+    }
+    .btn-link:hover {
+      background: #f0f3ff;
+      border-color: #3a4fd4;
+      color: #3a4fd4;
+    }
+    .btn-link .icon {
+      width: 22px;
+      height: 22px;
+      background: #1a1e3a;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.18s;
+    }
+    .btn-link:hover .icon { background: #3a4fd4; }
+    .btn-link .icon svg { width: 11px; height: 11px; fill: #fff; }
+    .btn-link .arrow { font-size: 12px; color: #8890aa; margin-left: 2px; }
+
+    /* ── 섹션 01 · 02 ── */
+    .section-box {
+      border: 1.5px solid #d0d6f0;
+      border-radius: 14px;
+      padding: 20px 22px;
+      margin-bottom: 16px;
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 14px;
+    }
+    .section-box.teal { border-color: #b2e8e4; }
+
+    .section-num {
+      flex-shrink: 0;
+      font-size: 12px;
+      font-weight: 900;
+      color: #fff;
+      background: #3a4fd4;
+      border-radius: 8px;
+      padding: 3px 9px;
+      margin-top: 6px;
+    }
+    .section-box.teal .section-num { background: #1bbfb0; }
+
+    .section-icon {
+      flex-shrink: 0;
+      width: 80px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: -2px;
+    }
+    .section-icon svg { width: 80px; height: 80px; }
+
+    .section-body { flex: 1; }
+
+    .section-title-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+    .section-title-row .name {
+      font-size: 30px;
+      font-weight: 900;
+      color: #2a3060;
+      letter-spacing: -0.01em;
+    }
+    .section-title-row .name.teal { color: #1bbfb0; }
+    .divider { width: 2px; height: 18px; background: #c8cfe0; border-radius: 2px; flex-shrink: 0; }
+    .section-title-row .role {
+      font-size: 12px;
+      color: #6878a8;
+      font-weight: 500;
+      line-height: 1.4;
+    }
+
+    .section-desc {
+      font-size: 17px;
+      font-weight: 700;
+      color: #1a1e3a;
+      line-height: 1.75;
+    }
+
+    /* ── CTA 배너 ── */
+    .cta-banner {
+      background: linear-gradient(135deg, #2a3580 0%, #1a2060 100%);
+      border-radius: 14px;
+      padding: 22px 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+    .cta-icon { flex-shrink: 0; font-size: 32px; }
+    .cta-text { flex: 1; }
+    .cta-text .cta-title {
+      font-size: 17px;
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 5px;
+    }
+    .cta-text .cta-sub {
+      font-size: 13.5px;
+      color: #a0b0e0;
+      line-height: 1.6;
+    }
+    .cta-text .cta-sub .cta-hl { color: #7dd4f8; }
+
+    /* ★★★ LINK 3 - PlayGround 바로가기 ★★★ */
+    .cta-btn {
+      flex-shrink: 0;
+      background: #fff;
+      border-radius: 10px;
+      padding: 12px 18px;
+      font-size: 14px;
+      font-weight: 900;
+      color: #1a2060;
+      text-decoration: none;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: opacity 0.18s;
+    }
+    .cta-btn:hover { opacity: 0.85; }
+    .cta-btn .cta-btn-arrow { font-size: 14px; color: #8890aa; }
+
+    /* ── 하단 ── */
+    .footer {
+      text-align: center;
+      font-size: 12px;
+      color: #8890aa;
+      letter-spacing: 0.05em;
+    }
+  </style>
+</head>
+<body>
+<div class="card">
+
+  <!-- 상단 라벨 -->
+  <div class="top-label">AI링커와 ACE 활동이 시작됩니다!</div>
+
+  <!-- 메인 타이틀 -->
+  <h1 class="main-title"><span class="ai-gradient">AI</span>를 현업 안으로</h1>
+
+  <!-- 서브타이틀 -->
+  <p class="subtitle">
+    AI를 더 가까이, 더 실질적으로 활용하기 위한<br>
+    <span class="highlight">ACE · AI링커 제도</span>를 안내드립니다.
+  </p>
+
+  <!-- 안내 박스 -->
+  <div class="info-box">
+    <p>
+      <strong>AI를 더 가까이, 더 실질적으로 활용하기 위한 ACE · AI 링커 제도를 안내드립니다.</strong><br>
+      제도에 대한 이해를 돕기 위해 설명 영상과 상세 자료를 준비했습니다.
+    </p>
+    <div class="btn-row">
+
+      <!-- ★★★ LINK 1 - 설명 영상 바로가기 ★★★ -->
+      <a href="여기에_설명영상_링크_입력" class="btn-link" target="_blank" rel="noopener">
+        <span class="icon">
+          <svg viewBox="0 0 10 12"><polygon points="1,1 9,6 1,11"/></svg>
+        </span>
+        설명 영상&nbsp;<span style="font-weight:400;color:#6878a8">바로가기</span>
+        <span class="arrow">›</span>
+      </a>
+
+      <!-- ★★★ LINK 2 - 설명 자료 바로가기 ★★★ -->
+      <a href="https://github.com/anguk-staion/ACEAI/blob/main/%E2%98%85260416_AI%EB%A7%81%EC%BB%A4_%EC%84%A0%EC%A0%95_%EB%B0%8F_%EC%9A%B4%EC%98%81_%EC%95%88%EB%82%B4_%EC%B5%9C%EC%A2%85_mobile%201.html" class="btn-link" target="_blank" rel="noopener">
+        <span class="icon">
+          <svg viewBox="0 0 12 14">
+            <rect x="1" y="1" width="10" height="12" rx="1.5" fill="none" stroke="#fff" stroke-width="1.5"/>
+            <line x1="3" y1="5" x2="9" y2="5" stroke="#fff" stroke-width="1.2"/>
+            <line x1="3" y1="7.5" x2="9" y2="7.5" stroke="#fff" stroke-width="1.2"/>
+            <line x1="3" y1="10" x2="7" y2="10" stroke="#fff" stroke-width="1.2"/>
+          </svg>
+        </span>
+        설명 자료&nbsp;<span style="font-weight:400;color:#6878a8">바로가기</span>
+        <span class="arrow">›</span>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- 섹션 01 AI링커 -->
+  <div class="section-box">
+    <div class="section-num">01</div>
+    <div class="section-icon">
+      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="32" cy="32" r="11" fill="#6c3fc5"/>
+        <circle cx="32" cy="28" r="3.5" fill="#fff"/>
+        <path d="M24.5 39c0-4.1 3.4-7.5 7.5-7.5s7.5 3.4 7.5 7.5" stroke="#fff" stroke-width="2" stroke-linecap="round" fill="none"/>
+        <circle cx="13" cy="17" r="7" fill="#c4b5f4" opacity=".9"/>
+        <circle cx="51" cy="17" r="7" fill="#c4b5f4" opacity=".9"/>
+        <circle cx="13" cy="47" r="7" fill="#c4b5f4" opacity=".9"/>
+        <circle cx="51" cy="47" r="7" fill="#c4b5f4" opacity=".9"/>
+        <circle cx="13" cy="15" r="2.2" fill="#7c5cbf"/>
+        <path d="M9 22c0-2.2 1.8-4 4-4s4 1.8 4 4" stroke="#7c5cbf" stroke-width="1.4" stroke-linecap="round" fill="none"/>
+        <circle cx="51" cy="15" r="2.2" fill="#7c5cbf"/>
+        <path d="M47 22c0-2.2 1.8-4 4-4s4 1.8 4 4" stroke="#7c5cbf" stroke-width="1.4" stroke-linecap="round" fill="none"/>
+        <circle cx="13" cy="45" r="2.2" fill="#7c5cbf"/>
+        <path d="M9 52c0-2.2 1.8-4 4-4s4 1.8 4 4" stroke="#7c5cbf" stroke-width="1.4" stroke-linecap="round" fill="none"/>
+        <circle cx="51" cy="45" r="2.2" fill="#7c5cbf"/>
+        <path d="M47 52c0-2.2 1.8-4 4-4s4 1.8 4 4" stroke="#7c5cbf" stroke-width="1.4" stroke-linecap="round" fill="none"/>
+        <line x1="20" y1="21" x2="26" y2="26" stroke="#9b7ee0" stroke-width="1.5" stroke-dasharray="3 2"/>
+        <line x1="44" y1="21" x2="38" y2="26" stroke="#9b7ee0" stroke-width="1.5" stroke-dasharray="3 2"/>
+        <line x1="20" y1="43" x2="26" y2="38" stroke="#9b7ee0" stroke-width="1.5" stroke-dasharray="3 2"/>
+        <line x1="44" y1="43" x2="38" y2="38" stroke="#9b7ee0" stroke-width="1.5" stroke-dasharray="3 2"/>
+      </svg>
+    </div>
+    <div class="section-body">
+      <div class="section-title-row">
+        <span class="name">AI링커</span>
+        <span class="divider"></span>
+        <span class="role">현업과 AI를 연결하는 옆자리 전파 담당자</span>
+      </div>
+      <p class="section-desc">
+        단위 조직에서 AI를 먼저 써보고<br>
+        활용 사례와 업무 니즈를 발굴 · 공유합니다.
+      </p>
+    </div>
+  </div>
+
+  <!-- 섹션 02 ACE -->
+  <div class="section-box teal">
+    <div class="section-num">02</div>
+    <div class="section-icon">
+      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="32" cy="36" r="22" fill="#b2f0ea" opacity=".45"/>
+        <circle cx="32" cy="36" r="15" fill="#3ecfc5" opacity=".55"/>
+        <circle cx="32" cy="36" r="8"  fill="#1bbfb0"/>
+        <circle cx="32" cy="36" r="3"  fill="#fff"/>
+        <line x1="50" y1="10" x2="34" y2="33" stroke="#0fa898" stroke-width="2.5" stroke-linecap="round"/>
+        <polygon points="50,10 44,16 52,18" fill="#0fa898"/>
+        <line x1="50" y1="10" x2="53" y2="6"  stroke="#0fa898" stroke-width="1.8" stroke-linecap="round"/>
+        <line x1="48" y1="12" x2="51" y2="7"  stroke="#0fa898" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div class="section-body">
+      <div class="section-title-row">
+        <span class="name teal">ACE</span>
+        <span class="divider"></span>
+        <span class="role">본부 차원의 과제 추진 및 링커 활동 지원 리더</span>
+      </div>
+      <p class="section-desc">
+        본부 차원의 AI 과제를 추진하고<br>
+        AI 링커 활동을 지원 · 연결합니다.
+      </p>
+    </div>
+  </div>
+
+  <!-- CTA 배너 -->
+  <div class="cta-banner">
+    <div class="cta-icon">📢</div>
+    <div class="cta-text">
+      <div class="cta-title">AI는 함께할 때 더 강력해집니다!</div>
+      <div class="cta-sub">
+        AI링커와 ACE 활동에 많은 관심과 참여 부탁드립니다.<br>
+        <span class="cta-hl">PlayGround에서 다양한 소식과 참여를 함께 만나보세요.</span>
+      </div>
+    </div>
+
+    <!-- ★★★ LINK 3 - PlayGround 바로가기 ★★★ -->
+    <a href="https://teams.microsoft.com/l/channel/19%3A1b51738e3b8448fab35322050c0047b2%40thread.tacv2/%F0%9F%8F%80%20%EC%9E%90%EC%9C%A0%EA%B2%8C%EC%8B%9C%ED%8C%90?groupId=43c83ad4-1ac0-44ad-8ab1-6729a6279fcb&tenantId=5fcb0def-a698-40ce-a73a-ea61130c13c6" class="cta-btn" target="_blank" rel="noopener">
+      PlayGround 바로가기 <span class="cta-btn-arrow">›</span>
+    </a>
+
+  </div>
+
+  <!-- 하단 -->
+  <div class="footer">워크이노베이션센터 · AI디자인랩</div>
+
+</div>
+</body>
+</html>
