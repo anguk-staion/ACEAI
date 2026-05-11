@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="format-detection" content="telephone=no, email=no, address=no">
+<meta name="x-apple-disable-message-reformatting">
+<title>AI링커(Linker) 선정 및 운영 안내 — 현대건설</title>
+<style>
+/* ── 현대건설 양식 기반 CSS ── */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+
+:root {
+  --hd-blue:    #003087;
+  --hd-blue2:   #0F4C9A;
+  --hd-line:    #003087;
+  --hd-bar:     #003087;
+  --hd-gray:    #555555;
+  --hd-lgray:   #888888;
+  --hd-border:  #BBBBBB;
+  --hd-tborder: #CCCCCC;
+  --hd-bg:      #F5F5F5;
+  --hd-yellow:  #E8A020;
+  --hd-red:     #C0392B;
+  --white:      #FFFFFF;
+  --font:       'Noto Sans KR', 'Malgun Gothic', sans-serif;
+  --c-understand:    #003087;
+  --c-understand-bg: #EEF3FA;
+  --c-understand-bd: #B8CEF0;
+  --c-make:          #0d7a5f;
+  --c-make-bg:       #ebfaf4;
+  --c-make-bd:       #a8e8cf;
+  --c-handle:        #a16207;
+  --c-handle-bg:     #fff8e6;
+  --c-handle-bd:     #fcd97a;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #e8e8e8;
+  font-family: 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+  font-size: 13px;
+  color: #222;
+  line-height: 1.65;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+  mso-line-height-rule: exactly;
+}
+
+p { margin: 0; }
+
+table { border-collapse: collapse; border-spacing: 0; }
+
+.page {
+  width: 794px;
+  min-height: 1123px;
+  margin: 32px auto;
+  background: #FFFFFF;
+  padding: 32px 40px 48px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+  text-align: left;
+}
+
+.hd-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-bottom: 6px;
+  margin-bottom: 0;
+}
+.hd-logo {
+  font-size: 22px;
+  font-weight: 900;
+  color: #111;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+.hd-logo span {
+  font-size: 11px;
+  font-weight: 400;
+  color: #888888;
+  letter-spacing: 0.05em;
+  display: block;
+  margin-bottom: 2px;
+}
+.hd-date {
+  font-size: 12.5px;
+  font-weight: 500;
+  color: #222;
+  text-align: right;
+  line-height: 1.4;
+}
+.hd-date .yr { font-size: 11px; color: #888888; }
+
+.hd-rule  { height: 3px; background: #003087; margin-bottom: 1px; }
+.hd-rule2 { height: 1px; background: #BBBBBB; margin-bottom: 20px; }
+
+.doc-title-block { text-align: center; margin-bottom: 22px; }
+.doc-title-block .doc-title {
+  font-size: 17px; font-weight: 700; color: #111;
+  letter-spacing: -0.01em; line-height: 1.4;
+}
+.doc-title-block .doc-sub {
+  font-size: 11px; color: #888888; margin-top: 4px; line-height: 1.65;
+}
+
+.section { margin-bottom: 22px; }
+
+.sec-title {
+  font-size: 13.5px; font-weight: 700; color: #111;
+  margin-bottom: 10px; display: flex; align-items: center;
+  gap: 6px; line-height: 1.65;
+}
+.sec-title .bar {
+  display: inline-block; width: 4px; height: 15px;
+  background: #003087; border-radius: 2px; flex-shrink: 0;
+}
+
+.sub-title {
+  font-size: 11.5px; font-weight: 700; color: #0F4C9A;
+  margin: 14px 0 7px 0; line-height: 1.65;
+}
+
+.body-text {
+  font-size: 12px; color: #333; line-height: 1.8;
+  margin-bottom: 10px; text-align: left;
+  mso-line-height-rule: exactly;
+}
+.note { font-size: 10.5px; color: #888888; line-height: 1.7; margin-top: 5px; }
+
+table.hd-table {
+  width: 100%; border-collapse: collapse; border-spacing: 0;
+  font-size: 11.5px; margin-bottom: 6px;
+}
+table.hd-table th {
+  background: #EEF3FA; color: #003087; font-weight: 700;
+  padding: 8px 11px; border: 1px solid #CCCCCC;
+  text-align: center; vertical-align: middle;
+  font-size: 11px; line-height: 1.6;
+  mso-line-height-rule: exactly;
+}
+table.hd-table td {
+  padding: 8px 11px; border: 1px solid #CCCCCC;
+  vertical-align: middle; line-height: 1.6; color: #222;
+  text-align: left; mso-line-height-rule: exactly;
+}
+table.hd-table td.label {
+  background: #F8FAFC; font-weight: 700; color: #334;
+  text-align: center; white-space: nowrap; width: 18%;
+}
+table.hd-table td.center { text-align: center; }
+
+.struct-row {
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  gap: 0; border: 1px solid #CCCCCC; border-radius: 3px;
+  overflow: hidden; margin-bottom: 6px;
+}
+.struct-col { padding: 13px 15px; border-right: 1px solid #CCCCCC; background: #FFFFFF; }
+.struct-col:last-child { border-right: none; }
+.struct-col.active { background: #003087; position: relative; }
+.struct-col .role-label {
+  font-size: 9.5px; font-weight: 700; letter-spacing: 0.08em;
+  color: #888888; text-transform: uppercase; margin-bottom: 4px;
+  line-height: 1.65;
+}
+.struct-col.active .role-label { color: rgba(255,255,255,0.55); }
+.struct-col .role-name { font-size: 14px; font-weight: 700; color: #111; margin-bottom: 6px; line-height: 1.5; }
+.struct-col.active .role-name { color: #fff; }
+.struct-col .role-desc { font-size: 10.5px; color: #555555; line-height: 1.65; }
+.struct-col.active .role-desc { color: rgba(255,255,255,0.82); }
+
+.role-cards { display: flex; flex-direction: column; gap: 11px; }
+
+.role-card {
+  display: grid; grid-template-columns: 44px 1fr;
+  border: 1px solid #CCCCCC; border-left: 4px solid #003087;
+  border-radius: 3px; overflow: hidden; background: #FFFFFF;
+}
+.role-card.c2 { border-left-color: #1A6BC4; }
+.role-card.c3 { border-left-color: #2E86C1; }
+
+.card-num {
+  background: #003087; display: flex; align-items: center;
+  justify-content: center; font-size: 17px; font-weight: 900;
+  color: rgba(255,255,255,0.3);
+}
+.role-card.c2 .card-num { background: #1A6BC4; }
+.role-card.c3 .card-num { background: #2E86C1; }
+
+.card-body { padding: 13px 16px; }
+
+.card-head {
+  display: flex; align-items: baseline; gap: 8px;
+  margin-bottom: 8px; flex-wrap: wrap;
+}
+.card-title { font-size: 13px; font-weight: 700; color: #111; line-height: 1.65; }
+.card-tag {
+  font-size: 10px; font-weight: 700; color: #0F4C9A;
+  background: #EEF3FA; border: 1px solid #C5D8F0;
+  padding: 2px 8px; border-radius: 20px; white-space: nowrap; line-height: 1.65;
+}
+
+.timing-table {
+  width: 100%; border-collapse: collapse; border-spacing: 0;
+  font-size: 11px; margin: 6px 0 8px;
+}
+.timing-table th {
+  background: #EEF3FA; color: #003087; font-weight: 700;
+  padding: 6px 10px; border: 1px solid #C5D8F0;
+  text-align: left; line-height: 1.6; mso-line-height-rule: exactly;
+}
+.timing-table td {
+  padding: 7px 10px; border: 1px solid #DCE9F5; color: #222;
+  font-size: 11px; line-height: 1.55; mso-line-height-rule: exactly;
+}
+.timing-table td:first-child {
+  font-weight: 700; color: #0F4C9A; background: #F4F8FD;
+  width: 14%; white-space: nowrap; text-align: center;
+}
+
+.log-grid {
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px; margin: 6px 0 8px;
+}
+.log-item { background: #F4F8FD; border: 1px solid #C5D8F0; border-radius: 3px; padding: 10px 12px; }
+.log-no {
+  font-size: 9px; font-weight: 700; color: #0F4C9A;
+  letter-spacing: 0.06em; margin-bottom: 4px; line-height: 1.65;
+}
+.log-txt { font-size: 11px; font-weight: 600; color: #1a2a4a; line-height: 1.5; }
+
+.ace-flow {
+  display: flex; align-items: center; gap: 5px;
+  flex-wrap: nowrap; margin: 6px 0 8px; width: 100%;
+}
+.ace-box {
+  background: #F4F8FD; border: 1px solid #C5D8F0; border-radius: 3px;
+  padding: 6px 12px; font-size: 11px; font-weight: 600; color: #1a2a4a;
+  text-align: center; line-height: 1.4; flex: 1;
+}
+.ace-arr { color: #0F4C9A; font-size: 14px; font-weight: 700; flex-shrink: 0; line-height: 1; }
+
+.uc-group-cell {
+  font-weight: 700; font-size: 12px; text-align: center !important;
+  vertical-align: middle; white-space: nowrap;
+  border-right: 3px solid !important; width: 9%; line-height: 1.6;
+}
+.uc-group-cell.understand { color: #003087; background: #EEF3FA !important; border-right-color: #003087 !important; }
+.uc-group-cell.make       { color: #0d7a5f; background: #ebfaf4 !important; border-right-color: #0d7a5f !important; }
+.uc-group-cell.handle     { color: #a16207; background: #fff8e6 !important; border-right-color: #a16207 !important; }
+.uc-sub-cell {
+  vertical-align: middle; text-align: center !important; white-space: nowrap;
+  background: #F8FAFC !important; font-size: 11px; font-weight: 700;
+  color: #444; width: 11%; line-height: 1.6;
+}
+.uc-dot-cell { text-align: center !important; font-size: 15px; font-weight: 700; width: 7%; line-height: 1.6; }
+.uc-dot-yes  { color: #1e40af; }
+.uc-dot-no   { color: #c8cace; font-weight: 400; }
+.uc-op-tag { display: inline-block; font-size: 10px; font-weight: 700; padding: 1px 6px; border-radius: 2px; white-space: nowrap; line-height: 1.6; }
+.uc-op-tag.common    { background: #EEF3FA; color: #003087; border: 1px solid #B8CEF0; }
+.uc-op-tag.dept      { background: #F3F0FF; color: #5B21B6; border: 1px solid #C4B5FD; }
+.uc-op-tag.paid-only { background: #fff8e6; color: #a16207; border: 1px solid #fcd97a; }
+.uc-legend-bar {
+  display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+  padding: 8px 14px; background: #F8FAFC; border: 1px solid #CCCCCC;
+  border-radius: 3px; margin-bottom: 8px; font-size: 11px; line-height: 1.65;
+}
+.uc-legend-bar .leg-label { font-weight: 700; color: #888888; letter-spacing: .04em; margin-right: 4px; }
+.uc-legend-bar .leg-item  { display: inline-flex; align-items: center; gap: 5px; color: #333; padding: 2px 9px; border: 1px solid #CCCCCC; border-radius: 2px; background: #FFFFFF; line-height: 1.65; }
+.uc-legend-bar .leg-div   { width: 1px; height: 14px; background: #CCCCCC; margin: 0 4px; }
+.uc-group-gap td { padding: 0 !important; height: 5px !important; background: #dde4ee !important; border: none !important; border-left: 1px solid #CCCCCC !important; border-right: 1px solid #CCCCCC !important; }
+
+.tag-paid {
+  display: inline-block; background: #FEF3CD; color: #7D4E00;
+  border: 1px solid #F5C97A; font-size: 9.5px; font-weight: 700;
+  padding: 1px 6px; border-radius: 2px; margin-left: 5px; vertical-align: middle;
+}
+
+.cycle-row { display: flex; gap: 0; border: 1px solid #CCCCCC; border-radius: 3px; overflow: hidden; }
+.cycle-step { flex: 1; padding: 14px 12px; text-align: center; position: relative; font-size: 11px; }
+.cycle-step:nth-child(odd)  { background: #F4F8FD; }
+.cycle-step:nth-child(even) { background: #FFFFFF; }
+.cycle-step + .cycle-step::before {
+  content: '▶'; position: absolute; left: -9px; top: 50%;
+  transform: translateY(-50%); font-size: 11px; color: #0F4C9A; z-index: 1;
+}
+.cycle-icon  { font-size: 18px; margin-bottom: 5px; }
+.cycle-title { font-size: 11px; font-weight: 700; color: #111; margin-bottom: 3px; line-height: 1.65; }
+.cycle-desc  { font-size: 10px; color: #555555; line-height: 1.5; }
+
+.notodo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.notodo-item {
+  display: flex; gap: 8px; align-items: flex-start;
+  background: #F0F6FF; border: 1px solid #C5D8F0;
+  border-left: 3px solid #0F4C9A; border-radius: 3px; padding: 10px 12px;
+}
+.notodo-x {
+  width: 17px; height: 17px; background: #0F4C9A; border-radius: 2px;
+  color: #FFFFFF; font-size: 9px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 2px;
+}
+.notodo-txt { font-size: 11px; color: #1a2a4a; line-height: 1.6; text-align: left; }
+
+.req-list { padding-left: 0; list-style: none; }
+.req-list li {
+  font-size: 12px; font-weight: 700; color: #111;
+  padding: 4px 0 4px 16px; position: relative;
+  line-height: 1.7; text-align: left;
+  mso-line-height-rule: exactly;
+}
+.req-list li::before {
+  content: '■'; position: absolute; left: 0;
+  color: #003087; font-size: 8px; top: 7px;
+}
+.req-list li span { font-size: 10.5px; font-weight: 400; color: #888888; line-height: 1.7; }
+
+.timeline-line {
+  font-size: 12px; font-weight: 700; color: #111;
+  padding: 10px 14px; background: #F4F8FD;
+  border: 1px solid #C5D8F0; border-radius: 3px;
+  line-height: 2.0; text-align: left;
+  mso-line-height-rule: exactly;
+}
+.timeline-line .arr { color: #0F4C9A; margin: 0 6px; }
+
+.hd-footer {
+  margin-top: 28px; padding-top: 12px; border-top: 1px solid #BBBBBB;
+  display: flex; justify-content: space-between; align-items: flex-end;
+}
+.footer-attach { font-size: 11px; color: #333; line-height: 2.0; }
+.footer-attach a { color: #0F4C9A; text-decoration: none; }
+.footer-attach a:hover { text-decoration: underline; }
+.footer-end { font-size: 12px; font-weight: 700; color: #111; line-height: 1.65; }
+
+.section-div { height: 1px; background: #E0E0E0; margin: 18px 0; }
+
+.inline-note {
+  font-size: 10.5px; color: #888888; padding-left: 12px;
+  position: relative; margin-top: 5px; line-height: 1.65;
+  mso-line-height-rule: exactly;
+}
+.inline-note::before { content: '※'; position: absolute; left: 0; }
+
+/* ── 모바일 래퍼 클래스 ── */
+.table-wrapper    { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.hd-table-wrapper { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.req-table-wrapper{ overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.ace-flow-scroll  { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+/* ── 820px 이하: 부드러운 전환 ── */
+@media screen and (max-width: 820px) {
+  body { background: #f2f2f2; }
+  .page {
+    width: 100% !important;
+    min-height: auto !important;
+    margin: 0 auto !important;
+    padding: 24px 22px 36px !important;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08) !important;
+  }
+}
+
+/* ── 768px 이하: 풀 모바일 ── */
+@media screen and (max-width: 768px) {
+  body { background: #FFFFFF; }
+  .page {
+    width: 100% !important;
+    min-height: auto !important;
+    margin: 0 !important;
+    padding: 18px 16px 30px !important;
+    box-shadow: none !important;
+  }
+  .hd-header { flex-direction: column !important; align-items: flex-start !important; gap: 6px; }
+  .hd-date   { text-align: left !important; font-size: 12px; }
+  .struct-row { grid-template-columns: 1fr !important; }
+  .struct-col { border-right: none !important; border-bottom: 1px solid #CCCCCC !important; padding: 11px 13px !important; }
+  .struct-col:last-child { border-bottom: none !important; }
+  .log-grid { grid-template-columns: 1fr !important; gap: 6px !important; }
+  .table-wrapper { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 3px; margin: 6px 0 8px; }
+  .timing-table { min-width: 390px; margin: 0 !important; }
+  .ace-flow-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 2px; margin: 6px 0 8px; }
+  .ace-flow { flex-wrap: nowrap !important; margin: 0 !important; min-width: 340px; }
+  .hd-table-wrapper { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 3px; margin-bottom: 6px; }
+  .req-table-wrapper{ overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 3px; margin-bottom: 6px; }
+  table.hd-table { min-width: 480px; font-size: 11px; }
+  .cycle-row { flex-direction: column !important; }
+  .cycle-step + .cycle-step::before { display: none !important; }
+  .notodo-grid { grid-template-columns: 1fr !important; gap: 6px !important; }
+  .hd-footer { flex-direction: column !important; align-items: flex-start !important; gap: 8px; }
+  .uc-legend-bar { flex-direction: column !important; align-items: flex-start !important; }
+  .timeline-line { font-size: 11px !important; line-height: 1.9 !important; }
+  .doc-title-block .doc-title { font-size: 15px !important; }
+  .sec-title { font-size: 12.5px !important; }
+}
+
+/* ── 480px 이하: 소형 스마트폰 ── */
+@media screen and (max-width: 480px) {
+  .page { padding: 14px 13px 24px !important; }
+  .hd-logo { font-size: 18px !important; }
+  .doc-title-block .doc-title { font-size: 14px !important; }
+  table.hd-table { min-width: 440px; }
+  .timing-table { min-width: 360px; }
+  .ace-flow { min-width: 300px; }
+}
+</style>
+</head>
+<body style="-webkit-text-size-adjust:none; text-size-adjust:none; font-family:'Noto Sans KR','Malgun Gothic',sans-serif; font-size:13px; color:#222; line-height:1.65; mso-line-height-rule:exactly;">
+<div class="page" style="width:794px; min-height:1123px; margin:32px auto; background:#FFFFFF; padding:32px 40px 48px; text-align:left; line-height:1.65; font-family:'Noto Sans KR','Malgun Gothic',sans-serif; font-size:13px; color:#222;">
+
+  <!-- ── 헤더 ── -->
+  <div class="hd-header" style="display:flex; justify-content:space-between; align-items:flex-end; padding-bottom:6px; margin-bottom:0;">
+    <div class="hd-logo" style="font-size:22px; font-weight:900; color:#111; letter-spacing:-0.03em; line-height:22px; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">
+      <span style="font-size:11px; font-weight:400; color:#888888; letter-spacing:0.05em; display:block; margin-bottom:2px; line-height:18px;">Hyundai Engineering &amp; Construction</span>
+      현대건설
+    </div>
+    <div class="hd-date" style="font-size:12.5px; font-weight:500; color:#222; text-align:right; line-height:18px; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">
+      <div class="yr" style="font-size:11px; color:#888888; line-height:18px;">워크이노베이션센터 AI디자인랩</div>
+      '26. 04
+    </div>
+  </div>
+  <div class="hd-rule" style="height:3px; background:#003087; margin-bottom:1px;"></div>
+  <div class="hd-rule2" style="height:1px; background:#BBBBBB; margin-bottom:20px;"></div>
+
+  <!-- ── 문서 제목 ── -->
+  <div class="doc-title-block" style="text-align:center; margin-bottom:22px;">
+    <div class="doc-title" style="font-size:17px; font-weight:700; color:#111; letter-spacing:-0.01em; line-height:24px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">AI링커(Linker) 선정 및 운영 안내</div>
+    <div class="doc-sub" style="font-size:11px; color:#888888; margin-top:4px; line-height:18px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">링커의 주요활동을 3가지 역할로 정의합니다</div>
+  </div>
+
+  <!-- ── 가. 운영 배경 ── -->
+  <div class="section" style="margin-bottom:22px;">
+    <div class="sec-title" style="font-size:13.5px; font-weight:700; color:#111; margin-bottom:10px; display:flex; align-items:center; gap:6px; line-height:22px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;"><span class="bar" style="display:inline-block; width:4px; height:15px; background:#003087; border-radius:2px; flex-shrink:0;"></span>가. 운영 배경 및 구조</div>
+    <p class="body-text" style="font-size:12px; color:#333; line-height:22px; margin:0 0 10px 0; text-align:left; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">
+      전사 AI 활용이 교육·행사에서 그치지 않고 실제 업무 루틴으로 정착되려면,
+      각 조직 안에서 AI를 <strong style="font-weight:700; line-height:22px;">직접 써보고 옆자리로 확산</strong>하는 실행 거점이 필요합니다.
+      AI링커는 AI디자인랩·ACE가 선정한 유스케이스<span style="color:#999999; line-height:22px;">(Use-case : AI 활용사례)</span>를 <strong style="font-weight:700; line-height:22px;">정기 회의 직후 그 자리에서 시연</strong>하고,
+      현장 반응을 피드백 로그로 남기는 역할을 맡습니다.
+    </p>
+
+    <div class="sub-title" style="font-size:11.5px; font-weight:700; color:#0F4C9A; margin:14px 0 7px 0; line-height:19px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">1) 3단계 운영 거점</div>
+    <div class="struct-row" style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:0; border:1px solid #CCCCCC; border-radius:3px; overflow:hidden; margin-bottom:6px;">
+      <div class="struct-col" style="padding:13px 15px; border-right:1px solid #CCCCCC; background:#FFFFFF;">
+        <div class="role-label" style="font-size:9.5px; font-weight:700; color:#888888; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:4px; line-height:16px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">전사 운영</div>
+        <div class="role-name" style="font-size:14px; font-weight:700; color:#111; margin-bottom:6px; line-height:21px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">AI디자인랩</div>
+        <div class="role-desc" style="font-size:10.5px; color:#555555; line-height:17px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">운영 기준 수립 · 전사 공통 유스케이스 선정 및 배포 · ACE 지원 · 전사 현황 총괄</div>
+      </div>
+      <div class="struct-col" style="padding:13px 15px; border-right:1px solid #CCCCCC; background:#FFFFFF;">
+        <div class="role-label" style="font-size:9.5px; font-weight:700; color:#888888; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:4px; line-height:16px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">본부 지원</div>
+        <div class="role-name" style="font-size:14px; font-weight:700; color:#111; margin-bottom:6px; line-height:21px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">ACE</div>
+        <div class="role-desc" style="font-size:10.5px; color:#555555; line-height:17px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">부서 특화 유스케이스 선정 및 배포 · 본부 내 링커 관리 · 피드백 및 니즈 파악</div>
+      </div>
+      <div class="struct-col active" style="padding:13px 15px; background:#003087;">
+        <div class="role-label" style="font-size:9.5px; font-weight:700; color:rgba(255,255,255,0.55); letter-spacing:0.08em; text-transform:uppercase; margin-bottom:4px; line-height:16px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">단위 조직 실행 ★</div>
+        <div class="role-name" style="font-size:14px; font-weight:700; color:#fff; margin-bottom:6px; line-height:21px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">AI링커</div>
+        <div class="role-desc" style="font-size:10.5px; color:rgba(255,255,255,0.82); line-height:17px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">정기 회의 직후 시연 → 피드백 로그 제출<br> → 건의 사항 ACE와 소통</div>
+      </div>
+    </div>
+    <p class="inline-note" style="font-size:10.5px; color:#888888; padding-left:12px; position:relative; margin-top:5px; line-height:17px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">유스케이스는 AI링커가 직접 작성하지 않습니다. AI디자인랩·ACE가 매월 정리하여 제공합니다.</p>
+  </div>
+
+  <div class="section-div" style="height:1px; background:#E0E0E0; margin:18px 0;"></div>
+
+  <!-- ── 나. AI링커 역할 (핵심) ── -->
+  <div class="section" style="margin-bottom:22px;">
+    <div class="sec-title" style="font-size:13.5px; font-weight:700; color:#111; margin-bottom:10px; display:flex; align-items:center; gap:6px; line-height:22px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;"><span class="bar" style="display:inline-block; width:4px; height:15px; background:#003087; border-radius:2px; flex-shrink:0;"></span>나. AI링커 역할</div>
+
+    <div class="role-cards" style="display:flex; flex-direction:column; gap:11px;">
+
+      <!-- ① -->
+      <div class="role-card" style="display:grid; grid-template-columns:44px 1fr; border:1px solid #CCCCCC; border-left:4px solid #003087; border-radius:3px; overflow:hidden; background:#FFFFFF;">
+        <div class="card-num" style="background:#003087; display:flex; align-items:center; justify-content:center; font-size:17px; font-weight:900; color:rgba(255,255,255,0.3); line-height:1;">①</div>
+        <div class="card-body" style="padding:13px 16px;">
+          <div class="card-head" style="display:flex; align-items:baseline; gap:8px; margin-bottom:8px; flex-wrap:wrap;">
+            <div class="card-title" style="font-size:13px; font-weight:700; color:#111; line-height:21px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">정기 회의 직후, 그 자리에서 5분 시연</div>
+            <div class="card-tag" style="font-size:10px; font-weight:700; color:#0F4C9A; background:#EEF3FA; border:1px solid #C5D8F0; padding:2px 8px; border-radius:20px; white-space:nowrap; line-height:16px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">별도 시간 확보 없이 회의 말미 5분 활용</div>
+          </div>
+          <div class="table-wrapper"><table class="timing-table" style="width:100%; border-collapse:collapse; border-spacing:0; font-size:11px; margin:6px 0 8px;">
+            <thead>
+              <tr>
+                <th style="background:#EEF3FA; color:#003087; font-weight:700; padding:6px 10px; border:1px solid #C5D8F0; text-align:center; line-height:18px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif; font-size:11px;">구분</th>
+                <th style="background:#EEF3FA; color:#003087; font-weight:700; padding:6px 10px; border:1px solid #C5D8F0; text-align:center; line-height:18px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif; font-size:11px;">시연 타이밍</th>
+                <th style="background:#EEF3FA; color:#003087; font-weight:700; padding:6px 10px; border:1px solid #C5D8F0; text-align:center; line-height:18px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif; font-size:11px;">주요 도구</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="padding:7px 10px; border:1px solid #DCE9F5; color:#0F4C9A; font-weight:700; background:#F4F8FD; width:14%; white-space:nowrap; text-align:center; font-size:11px; line-height:17px; mso-line-height-rule:exactly; vertical-align:middle; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">현장</td>
+                <td style="padding:7px 10px; border:1px solid #DCE9F5; color:#222; font-size:11px; line-height:17px; mso-line-height-rule:exactly; text-align:center; vertical-align:middle; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">주간공정회의 종료 직후<br><span style="font-size:10px; color:#888888; font-weight:400; line-height:16px; mso-line-height-rule:exactly;">※ 현장 규모상 전체 참석이 어려운 경우<br>Teams 화상회의로 대체 가능</span></td>
+                <td style="padding:7px 10px; border:1px solid #DCE9F5; color:#222; font-size:11px; line-height:17px; mso-line-height-rule:exactly; text-align:center; vertical-align:middle; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">Copilot — 유스케이스 프롬프트를 그 자리에서 직접 실행</td>
+              </tr>
+              <tr>
+                <td style="padding:7px 10px; border:1px solid #DCE9F5; color:#0F4C9A; font-weight:700; background:#F4F8FD; width:14%; white-space:nowrap; text-align:center; font-size:11px; line-height:17px; mso-line-height-rule:exactly; vertical-align:middle; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">본사</td>
+                <td style="padding:7px 10px; border:1px solid #DCE9F5; color:#222; font-size:11px; line-height:17px; mso-line-height-rule:exactly; text-align:center; vertical-align:middle; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">팀 주간회의 또는 보안교육 종료 직후</td>
+                <td style="padding:7px 10px; border:1px solid #DCE9F5; color:#222; font-size:11px; line-height:17px; mso-line-height-rule:exactly; text-align:center; vertical-align:middle; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">Copilot — 동일</td>
+              </tr>
+            </tbody>
+          </table></div>
+          <p class="inline-note" style="font-size:10.5px; color:#888888; padding-left:12px; position:relative; margin-top:5px; line-height:17px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">AI링커에게는 Copilot 유료계정이 제공되며, 무엇을 시연할지는 AI디자인랩·ACE가 월별로 선정하여 제공합니다.</p>
+        </div>
+      </div>
+
+      <!-- ② -->
+      <div class="role-card c2" style="display:grid; grid-template-columns:44px 1fr; border:1px solid #CCCCCC; border-left:4px solid #1A6BC4; border-radius:3px; overflow:hidden; background:#FFFFFF;">
+        <div class="card-num" style="background:#1A6BC4; display:flex; align-items:center; justify-content:center; font-size:17px; font-weight:900; color:rgba(255,255,255,0.3); line-height:1;">②</div>
+        <div class="card-body" style="padding:13px 16px;">
+          <div class="card-head" style="display:flex; align-items:baseline; gap:8px; margin-bottom:8px; flex-wrap:wrap;">
+            <div class="card-title" style="font-size:13px; font-weight:700; color:#111; line-height:21px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">시연 후 피드백 로그 제출</div>
+            <div class="card-tag" style="font-size:10px; font-weight:700; color:#0F4C9A; background:#EEF3FA; border:1px solid #C5D8F0; padding:2px 8px; border-radius:20px; white-space:nowrap; line-height:16px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">월 1건 · 시연 당일 또는 익일 이내 · 5분 작성</div>
+          </div>
+          <div class="log-grid" style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; margin:6px 0 8px;">
+            <div class="log-item" style="background:#F4F8FD; border:1px solid #C5D8F0; border-radius:3px; padding:10px 12px;">
+              <div class="log-no" style="font-size:9px; font-weight:700; color:#0F4C9A; letter-spacing:0.06em; margin-bottom:4px; line-height:15px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">필수 체크항목 1</div>
+              <div class="log-txt" style="font-size:11px; font-weight:600; color:#1a2a4a; line-height:17px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">실제 시연 여부</div>
+            </div>
+            <div class="log-item" style="background:#F4F8FD; border:1px solid #C5D8F0; border-radius:3px; padding:10px 12px;">
+              <div class="log-no" style="font-size:9px; font-weight:700; color:#0F4C9A; letter-spacing:0.06em; margin-bottom:4px; line-height:15px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">필수 체크항목 2</div>
+              <div class="log-txt" style="font-size:11px; font-weight:600; color:#1a2a4a; line-height:17px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">현장 긍정·부정 피드백</div>
+            </div>
+            <div class="log-item" style="background:#F4F8FD; border:1px solid #C5D8F0; border-radius:3px; padding:10px 12px;">
+              <div class="log-no" style="font-size:9px; font-weight:700; color:#0F4C9A; letter-spacing:0.06em; margin-bottom:4px; line-height:15px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">필수 체크항목 3</div>
+              <div class="log-txt" style="font-size:11px; font-weight:600; color:#1a2a4a; line-height:17px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">참석 인원 수</div>
+            </div>
+          </div>
+          <p class="inline-note" style="font-size:10.5px; color:#888888; padding-left:12px; position:relative; margin-top:5px; line-height:17px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">잘 됐든 안 됐든 기록 자체가 활동 실적으로 인정되며, 별도 보고서 작성이 아닌 피드백 로그만 간단히 작성하면 됩니다.</p>
+        </div>
+      </div>
+
+      <!-- ③ -->
+      <div class="role-card c3" style="display:grid; grid-template-columns:44px 1fr; border:1px solid #CCCCCC; border-left:4px solid #2E86C1; border-radius:3px; overflow:hidden; background:#FFFFFF;">
+        <div class="card-num" style="background:#2E86C1; display:flex; align-items:center; justify-content:center; font-size:17px; font-weight:900; color:rgba(255,255,255,0.3); line-height:1;">③</div>
+        <div class="card-body" style="padding:13px 16px;">
+          <div class="card-head" style="display:flex; align-items:baseline; gap:8px; margin-bottom:8px; flex-wrap:wrap;">
+            <div class="card-title" style="font-size:13px; font-weight:700; color:#111; line-height:21px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">로그 외 추가 문의·요청 사항은 ACE와 소통</div>
+            <div class="card-tag" style="font-size:10px; font-weight:700; color:#0F4C9A; background:#EEF3FA; border:1px solid #C5D8F0; padding:2px 8px; border-radius:20px; white-space:nowrap; line-height:16px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">수시 · ACE와 AI디자인랩이 논의</div>
+          </div>
+          <div class="ace-flow-scroll"><div class="ace-flow" style="display:flex; align-items:center; gap:5px; flex-wrap:nowrap; margin:6px 0 8px; width:100%;">
+            <div class="ace-box" style="background:#F4F8FD; border:1px solid #C5D8F0; border-radius:3px; padding:6px 12px; font-size:11px; font-weight:600; color:#1a2a4a; text-align:center; line-height:15px; mso-line-height-rule:exactly; flex:1; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">AI링커<br>요청사항 전달</div>
+            <div class="ace-arr" style="color:#0F4C9A; font-size:14px; font-weight:700; flex-shrink:0; line-height:1;">→</div>
+            <div class="ace-box" style="background:#F4F8FD; border:1px solid #C5D8F0; border-radius:3px; padding:6px 12px; font-size:11px; font-weight:600; color:#1a2a4a; text-align:center; line-height:15px; mso-line-height-rule:exactly; flex:1; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">ACE<br>접수·소통</div>
+            <div class="ace-arr" style="color:#0F4C9A; font-size:14px; font-weight:700; flex-shrink:0; line-height:1;">↔</div>
+            <div class="ace-box" style="background:#F4F8FD; border:1px solid #C5D8F0; border-radius:3px; padding:6px 12px; font-size:11px; font-weight:600; color:#1a2a4a; text-align:center; line-height:15px; mso-line-height-rule:exactly; flex:1; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">AI디자인랩<br>논의</div>
+            <div class="ace-arr" style="color:#0F4C9A; font-size:14px; font-weight:700; flex-shrink:0; line-height:1;">→</div>
+            <div class="ace-box" style="background:#F4F8FD; border:1px solid #C5D8F0; border-radius:3px; padding:6px 12px; font-size:11px; font-weight:600; color:#1a2a4a; text-align:center; line-height:15px; mso-line-height-rule:exactly; flex:1; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">유스케이스<br>업데이트</div>
+          </div></div>
+          <p class="inline-note" style="font-size:10.5px; color:#888888; padding-left:12px; position:relative; margin-top:5px; line-height:17px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">링커는 ACE에게 전달하면 됩니다. 방향과 해결책은 ACE와 AI디자인랩이 논의합니다.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section-div" style="height:1px; background:#E0E0E0; margin:18px 0;"></div>
+
+  <!-- ── 다. 유스케이스 예시 ── -->
+  <div class="section" style="margin-bottom:22px;">
+    <div class="sec-title" style="font-size:13.5px; font-weight:700; color:#111; margin-bottom:10px; display:flex; align-items:center; gap:6px; line-height:22px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;"><span class="bar" style="display:inline-block; width:4px; height:15px; background:#003087; border-radius:2px; flex-shrink:0;"></span>다. 전파 유스케이스 예시 <span style="font-size:11px; font-weight:400; color:#888888; line-height:18px;">(AI디자인랩·ACE가 매월 선정·제공)</span></div>
+
+    <!-- 범례 -->
+    <div class="uc-legend-bar" style="display:flex; flex-direction:column; align-items:flex-start; gap:5px; padding:8px 14px; background:#F8FAFC; border:1px solid #CCCCCC; border-radius:3px; margin-bottom:8px; font-size:11px; line-height:18px; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">
+      <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap; line-height:18px;">
+        <span class="leg-label" style="font-weight:700; color:#888888; letter-spacing:.04em; margin-right:4px; line-height:18px;">범례</span>
+        <span class="leg-item" style="display:inline-flex; align-items:center; gap:5px; color:#333; padding:2px 9px; border:1px solid #CCCCCC; border-radius:2px; background:#FFFFFF; line-height:18px;"><span style="color:#1e40af; font-weight:700; line-height:18px;">○</span> 가능</span>
+        <span class="leg-item" style="display:inline-flex; align-items:center; gap:5px; color:#333; padding:2px 9px; border:1px solid #CCCCCC; border-radius:2px; background:#FFFFFF; line-height:18px;"><span style="color:#c8cace; line-height:18px;">–</span> 불가 (유료 전용)</span>
+      </div>
+      <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap; line-height:18px;">
+        <span class="leg-item" style="display:inline-flex; align-items:center; gap:5px; color:#333; padding:2px 9px; border:1px solid #CCCCCC; border-radius:2px; background:#FFFFFF; line-height:18px;"><span class="uc-op-tag common" style="display:inline-block; font-size:10px; font-weight:700; padding:1px 6px; border-radius:2px; white-space:nowrap; background:#EEF3FA; color:#003087; border:1px solid #B8CEF0; line-height:16px;">전사 공통</span> AI디자인랩 주도 발굴</span>
+        <span class="leg-item" style="display:inline-flex; align-items:center; gap:5px; color:#333; padding:2px 9px; border:1px solid #CCCCCC; border-radius:2px; background:#FFFFFF; line-height:18px;"><span class="uc-op-tag dept" style="display:inline-block; font-size:10px; font-weight:700; padding:1px 6px; border-radius:2px; white-space:nowrap; background:#F3F0FF; color:#5B21B6; border:1px solid #C4B5FD; line-height:16px;">부서 특화</span> ACE 주도 발굴</span>
+        <span class="leg-item" style="display:inline-flex; align-items:center; gap:5px; color:#333; padding:2px 9px; border:1px solid #CCCCCC; border-radius:2px; background:#FFFFFF; line-height:18px;"><span class="uc-op-tag paid-only" style="display:inline-block; font-size:10px; font-weight:700; padding:1px 6px; border-radius:2px; white-space:nowrap; background:#fff8e6; color:#a16207; border:1px solid #fcd97a; line-height:16px;">유료 전용</span> Copilot 유료계정 필요</span>
+      </div>
+    </div>
+
+    <div class="hd-table-wrapper"><table class="hd-table" style="width:100%; border-collapse:collapse; border-spacing:0; font-size:11.5px; margin-bottom:6px;">
+      <thead>
+        <!-- 1행: 상단 헤더 -->
+        <tr>
+          <th rowspan="2" style="background:#EEF3FA; color:#003087; font-weight:700; padding:8px 11px; border:1px solid #CCCCCC; text-align:center; vertical-align:middle; font-size:11px; line-height:18px; mso-line-height-rule:exactly; width:8%; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">대분류</th>
+          <th rowspan="2" style="background:#EEF3FA; color:#003087; font-weight:700; padding:8px 11px; border:1px solid #CCCCCC; text-align:center; vertical-align:middle; font-size:11px; line-height:18px; mso-line-height-rule:exactly; width:10%; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">세부 구분</th>
+          <th rowspan="2" style="background:#EEF3FA; color:#003087; font-weight:700; padding:8px 11px; border:1px solid #CCCCCC; text-align:center; vertical-align:middle; font-size:11px; line-height:18px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">대표 사례 (시연 방법)</th>
+          <th colspan="2" style="background:#EEF3FA; color:#003087; font-weight:700; padding:6px 11px; border:1px solid #CCCCCC; text-align:center; vertical-align:middle; font-size:11px; line-height:18px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">Copilot</th>
+          <th rowspan="2" style="background:#EEF3FA; color:#003087; font-weight:700; padding:8px 11px; border:1px solid #CCCCCC; text-align:center; vertical-align:middle; font-size:11px; line-height:18px; mso-line-height-rule:exactly; width:11%; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">활용 구분</th>
+        </tr>
+        <!-- 2행: 무료/유료 -->
+        <tr>
+          <th style="background:#EEF3FA; color:#003087; font-weight:700; padding:6px 11px; border:1px solid #CCCCCC; text-align:center; vertical-align:middle; font-size:11px; line-height:18px; mso-line-height-rule:exactly; width:6%; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">무료</th>
+          <th style="background:#EEF3FA; color:#003087; font-weight:700; padding:6px 11px; border:1px solid #CCCCCC; text-align:center; vertical-align:middle; font-size:11px; line-height:18px; mso-line-height-rule:exactly; width:6%; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">유료</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- ── 이해하기 ── -->
+        <tr>
+          <td class="uc-group-cell understand" rowspan="4" style="font-weight:700; font-size:12px; text-align:center; vertical-align:middle; white-space:nowrap; border-right:3px solid #003087; width:9%; color:#003087; background:#EEF3FA; border:1px solid #CCCCCC; border-right:3px solid #003087; padding:8px 11px; line-height:19px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">이해<br>하기</td>
+          <td class="uc-sub-cell" rowspan="2" style="vertical-align:middle; text-align:center; white-space:nowrap; background:#F8FAFC; font-size:11px; font-weight:700; color:#444; width:11%; border:1px solid #CCCCCC; padding:8px 11px; line-height:18px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">찾기<br>및<br> 정리</td>
+          <td style="padding:8px 11px; border:1px solid #CCCCCC; vertical-align:middle; color:#222; text-align:left; font-size:11.5px; line-height:18px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">사내 규정·시방서 기반 시공 기준 질의응답<br><span style="font-size:10px; color:#888888; line-height:16px; mso-line-height-rule:exactly;">Copilot에 규정 PDF 업로드 → "이 경우 적용 기준 알려줘" 입력</span></td>
+          <td class="uc-dot-cell" style="text-align:center; font-size:15px; font-weight:700; width:7%; border:1px solid #CCCCCC; padding:8px 11px; vertical-align:middle; line-height:18px;"><span class="uc-dot-yes" style="color:#1e40af;">○</span></td>
+          <td class="uc-dot-cell" style="text-align:center; font-size:15px; font-weight:700; width:7%; border:1px solid #CCCCCC; padding:8px 11px; vertical-align:middle; line-height:18px;"><span class="uc-dot-yes" style="color:#1e40af;">○</span></td>
+          <td class="tag-cell" style="text-align:center; vertical-align:middle; border:1px solid #CCCCCC; padding:8px 11px; line-height:18px;"><span class="uc-op-tag common" style="display:inline-block; font-size:10px; font-weight:700; padding:1px 6px; border-radius:2px; white-space:nowrap; background:#EEF3FA; color:#003087; border:1px solid #B8CEF0; line-height:16px; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">전사 공통</span></td>
+        </tr>
+        <tr>
+          <td style="padding:8px 11px; border:1px solid #CCCCCC; vertical-align:middle; color:#222; text-align:left; font-size:11.5px; line-height:18px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">회의 음성녹음 기반 핵심 쟁점·후속 조치 정리<br><span style="font-size:10px; color:#888888; line-height:16px; mso-line-height-rule:exactly;">회의 내용 텍스트를 Copilot에 붙여넣기 → "핵심 결정사항·액션아이템 정리해줘" 입력</span></td>
+          <td class="uc-dot-cell" style="text-align:center; font-size:15px; font-weight:700; width:7%; border:1px solid #CCCCCC; padding:8px 11px; vertical-align:middle; line-height:18px;"><span class="uc-dot-yes" style="color:#1e40af;">○</span></td>
+          <td class="uc-dot-cell" style="text-align:center; font-size:15px; font-weight:700; width:7%; border:1px solid #CCCCCC; padding:8px 11px; vertical-align:middle; line-height:18px;"><span class="uc-dot-yes" style="color:#1e40af;">○</span></td>
+          <td class="tag-cell" style="text-align:center; vertical-align:middle; border:1px solid #CCCCCC; padding:8px 11px; line-height:18px;"><span class="uc-op-tag common" style="display:inline-block; font-size:10px; font-weight:700; padding:1px 6px; border-radius:2px; white-space:nowrap; background:#EEF3FA; color:#003087; border:1px solid #B8CEF0; line-height:16px; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">전사 공통</span></td>
+        </tr>
+        <tr>
+          <td class="uc-sub-cell" style="vertical-align:middle; text-align:center; white-space:nowrap; background:#F8FAFC; font-size:11px; font-weight:700; color:#444; width:11%; border:1px solid #CCCCCC; padding:8px 11px; line-height:18px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">내용<br>요약</td>
+          <td style="padding:8px 11px; border:1px solid #CCCCCC; vertical-align:middle; color:#222; text-align:left; font-size:11.5px; line-height:18px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">메일·채팅 이력 참조 업무지시 취합 정리<br><span style="font-size:10px; color:#888888; line-height:16px; mso-line-height-rule:exactly;">Outlook·Teams에서 Copilot 실행 → "이번 주 업무지시 항목만 정리해줘" 입력</span></td>
+          <td class="uc-dot-cell" style="text-align:center; font-size:15px; font-weight:700; width:7%; border:1px solid #CCCCCC; padding:8px 11px; vertical-align:middle; line-height:18px;"><span class="uc-dot-no" style="color:#c8cace; font-weight:400;">–</span></td>
+          <td class="uc-dot-cell" style="text-align:center; font-size:15px; font-weight:700; width:7%; border:1px solid #CCCCCC; padding:8px 11px; vertical-align:middle; line-height:18px;"><span class="uc-dot-yes" style="color:#1e40af;">○</span></td>
+          <td class="tag-cell" style="text-align:center; vertical-align:middle; border:1px solid #CCCCCC; padding:8px 11px; line-height:18px;"><span class="uc-op-tag common" style="display:inline-block; font-size:10px; font-weight:700; padding:1px 6px; border-radius:2px; white-space:nowrap; background:#EEF3FA; color:#003087; border:1px solid #B8CEF0; line-height:16px; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">전사 공통</span><br><span class="uc-op-tag paid-only" style="display:inline-block; font-size:10px; font-weight:700; padding:1px 6px; border-radius:2px; white-space:nowrap; background:#fff8e6; color:#a16207; border:1px solid #fcd97a; margin-top:3px; line-height:16px; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">유료 전용</span></td>
+        </tr>
+        <tr>
+          <td class="uc-sub-cell" style="vertical-align:middle; text-align:center; white-space:nowrap; background:#F8FAFC; font-size:11px; font-weight:700; color:#444; width:11%; border:1px solid #CCCCCC; padding:8px 11px; line-height:18px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">검토<br>점검</td>
+          <td style="padding:8px 11px; border:1px solid #CCCCCC; vertical-align:middle; color:#222; text-align:left; font-size:11.5px; line-height:18px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">계약서·ITB 독소조항·부당특약 위반 표현 점검<br><span style="font-size:10px; color:#888888; line-height:16px; mso-line-height-rule:exactly;">계약서 PDF를 Copilot에 업로드 → "시공사에 불리한 OOO 조항 찾아줘" 입력</span></td>
+          <td class="uc-dot-cell" style="text-align:center; font-size:15px; font-weight:700; width:7%; border:1px solid #CCCCCC; padding:8px 11px; vertical-align:middle; line-height:18px;"><span class="uc-dot-yes" style="color:#1e40af;">○</span></td>
+          <td class="uc-dot-cell" style="text-align:center; font-size:15px; font-weight:700; width:7%; border:1px solid #CCCCCC; padding:8px 11px; vertical-align:middle; line-height:18px;"><span class="uc-dot-yes" style="color:#1e40af;">○</span></td>
+          <td class="tag-cell" style="text-align:center; vertical-align:middle; border:1px solid #CCCCCC; padding:8px 11px; line-height:18px;"><span class="uc-op-tag dept" style="display:inline-block; font-size:10px; font-weight:700; padding:1px 6px; border-radius:2px; white-space:nowrap; background:#F3F0FF; color:#5B21B6; border:1px solid #C4B5FD; line-height:16px; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">부서 특화</span></td>
+        </tr>
+
+        <tr class="uc-group-gap"><td colspan="6" style="padding:0; height:5px; background:#dde4ee; border:none; border-left:1px solid #CCCCCC; border-right:1px solid #CCCCCC;"></td></tr>
+
+        <!-- ── 만들기 ── -->
+        <tr>
+          <td class="uc-group-cell make" rowspan="4" style="font-weight:700; font-size:12px; text-align:center; vertical-align:middle; white-space:nowrap; border-right:3px solid #0d7a5f; width:9%; color:#0d7a5f; background:#ebfaf4; border:1px solid #CCCCCC; border-right:3px solid #0d7a5f; padding:8px 11px; line-height:19px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">만들기</td>
+          <td class="uc-sub-cell" rowspan="2" style="vertical-align:middle; text-align:center; white-space:nowrap; background:#F8FAFC; font-size:11px; font-weight:700; color:#444; width:11%; border:1px solid #CCCCCC; padding:8px 11px; line-height:18px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">작성<br>하기</td>
+          <td style="padding:8px 11px; border:1px solid #CCCCCC; vertical-align:middle; color:#222; text-align:left; font-size:11.5px; line-height:18px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">상황별 발주처 공문·협력사 이메일 초안 작성<br><span style="font-size:10px; color:#888888; line-height:16px; mso-line-height-rule:exactly;">작성한 초안을 Copilot에 붙여넣기 → "더 공식적으로 교정해줘" 입력 → 결과 비교</span></td>
+          <td class="uc-dot-cell" style="text-align:center; font-size:15px; font-weight:700; width:7%; border:1px solid #CCCCCC; padding:8px 11px; vertical-align:middle; line-height:18px;"><span class="uc-dot-yes" style="color:#1e40af;">○</span></td>
+          <td class="uc-dot-cell" style="text-align:center; font-size:15px; font-weight:700; width:7%; border:1px solid #CCCCCC; padding:8px 11px; vertical-align:middle; line-height:18px;"><span class="uc-dot-yes" style="color:#1e40af;">○</span></td>
+          <td class="tag-cell" style="text-align:center; vertical-align:middle; border:1px solid #CCCCCC; padding:8px 11px; line-height:18px;"><span class="uc-op-tag common" style="display:inline-block; font-size:10px; font-weight:700; padding:1px 6px; border-radius:2px; white-space:nowrap; background:#EEF3FA; color:#003087; border:1px solid #B8CEF0; line-height:16px; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">전사 공통</span></td>
+        </tr>
+        <tr>
+          <td style="padding:8px 11px; border:1px solid #CCCCCC; vertical-align:middle; color:#222; text-align:left; font-size:11.5px; line-height:18px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">보고서·발표자료 초안 작성<br><span style="font-size:10px; color:#888888; line-height:16px; mso-line-height-rule:exactly;">핵심 내용·수치를 Copilot에 입력 → "보고서 형식으로 구성해줘" → 초안 생성 후 수정</span></td>
+          <td class="uc-dot-cell" style="text-align:center; font-size:15px; font-weight:700; width:7%; border:1px solid #CCCCCC; padding:8px 11px; vertical-align:middle; line-height:18px;"><span class="uc-dot-yes" style="color:#1e40af;">○</span></td>
+          <td class="uc-dot-cell" style="text-align:center; font-size:15px; font-weight:700; width:7%; border:1px solid #CCCCCC; padding:8px 11px; vertical-align:middle; line-height:18px;"><span class="uc-dot-yes" style="color:#1e40af;">○</span></td>
+          <td class="tag-cell" style="text-align:center; vertical-align:middle; border:1px solid #CCCCCC; padding:8px 11px; line-height:18px;"><span class="uc-op-tag common" style="display:inline-block; font-size:10px; font-weight:700; padding:1px 6px; border-radius:2px; white-space:nowrap; background:#EEF3FA; color:#003087; border:1px solid #B8CEF0; line-height:16px; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">전사 공통</span></td>
+        </tr>
+        <tr>
+          <td class="uc-sub-cell" style="vertical-align:middle; text-align:center; white-space:nowrap; background:#F8FAFC; font-size:11px; font-weight:700; color:#444; width:11%; border:1px solid #CCCCCC; padding:8px 11px; line-height:18px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">변환<br>정리</td>
+          <td style="padding:8px 11px; border:1px solid #CCCCCC; vertical-align:middle; color:#222; text-align:left; font-size:11.5px; line-height:18px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">한 달간 수발신 메일·파일 기반 사업관리보고서 현황 초안 작성<br><span style="font-size:10px; color:#888888; line-height:16px; mso-line-height-rule:exactly;">Outlook에서 Copilot 실행 → "이번 달 주요 수발신 메일 기준으로 초안 만들어줘" 입력</span></td>
+          <td class="uc-dot-cell" style="text-align:center; font-size:15px; font-weight:700; width:7%; border:1px solid #CCCCCC; padding:8px 11px; vertical-align:middle; line-height:18px;"><span class="uc-dot-no" style="color:#c8cace; font-weight:400;">–</span></td>
+          <td class="uc-dot-cell" style="text-align:center; font-size:15px; font-weight:700; width:7%; border:1px solid #CCCCCC; padding:8px 11px; vertical-align:middle; line-height:18px;"><span class="uc-dot-yes" style="color:#1e40af;">○</span></td>
+          <td class="tag-cell" style="text-align:center; vertical-align:middle; border:1px solid #CCCCCC; padding:8px 11px; line-height:18px;"><span class="uc-op-tag common" style="display:inline-block; font-size:10px; font-weight:700; padding:1px 6px; border-radius:2px; white-space:nowrap; background:#EEF3FA; color:#003087; border:1px solid #B8CEF0; line-height:16px; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">전사 공통</span><br><span class="uc-op-tag paid-only" style="display:inline-block; font-size:10px; font-weight:700; padding:1px 6px; border-radius:2px; white-space:nowrap; background:#fff8e6; color:#a16207; border:1px solid #fcd97a; margin-top:3px; line-height:16px; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">유료 전용</span></td>
+        </tr>
+        <tr>
+          <td class="uc-sub-cell" style="vertical-align:middle; text-align:center; white-space:nowrap; background:#F8FAFC; font-size:11px; font-weight:700; color:#444; width:11%; border:1px solid #CCCCCC; padding:8px 11px; line-height:18px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">스크린샷<br>활용</td>
+          <td style="padding:8px 11px; border:1px solid #CCCCCC; vertical-align:middle; color:#222; text-align:left; font-size:11.5px; line-height:18px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">화면 캡처 이미지 기반 AI 질의응답<br><span style="font-size:10px; color:#888888; line-height:16px; mso-line-height-rule:exactly;">Copilot 채팅창에 화면 캡처 이미지 첨부 → 질문 입력 → 답변 확인</span></td>
+          <td class="uc-dot-cell" style="text-align:center; font-size:15px; font-weight:700; width:7%; border:1px solid #CCCCCC; padding:8px 11px; vertical-align:middle; line-height:18px;"><span class="uc-dot-yes" style="color:#1e40af;">○</span></td>
+          <td class="uc-dot-cell" style="text-align:center; font-size:15px; font-weight:700; width:7%; border:1px solid #CCCCCC; padding:8px 11px; vertical-align:middle; line-height:18px;"><span class="uc-dot-yes" style="color:#1e40af;">○</span></td>
+          <td class="tag-cell" style="text-align:center; vertical-align:middle; border:1px solid #CCCCCC; padding:8px 11px; line-height:18px;"><span class="uc-op-tag common" style="display:inline-block; font-size:10px; font-weight:700; padding:1px 6px; border-radius:2px; white-space:nowrap; background:#EEF3FA; color:#003087; border:1px solid #B8CEF0; line-height:16px; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">전사 공통</span></td>
+        </tr>
+
+        <tr class="uc-group-gap"><td colspan="6" style="padding:0; height:5px; background:#dde4ee; border:none; border-left:1px solid #CCCCCC; border-right:1px solid #CCCCCC;"></td></tr>
+
+        <!-- ── 처리하기 ── -->
+        <tr>
+          <td class="uc-group-cell handle" rowspan="2" style="font-weight:700; font-size:12px; text-align:center; vertical-align:middle; white-space:nowrap; border-right:3px solid #a16207; width:9%; color:#a16207; background:#fff8e6; border:1px solid #CCCCCC; border-right:3px solid #a16207; padding:8px 11px; line-height:19px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">처리<br>하기</td>
+          <td class="uc-sub-cell" style="vertical-align:middle; text-align:center; white-space:nowrap; background:#F8FAFC; font-size:11px; font-weight:700; color:#444; width:11%; border:1px solid #CCCCCC; padding:8px 11px; line-height:18px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">업무<br>자동화</td>
+          <td style="padding:8px 11px; border:1px solid #CCCCCC; vertical-align:middle; color:#222; text-align:left; font-size:11.5px; line-height:18px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">DABs회의 현장 위치도 시각화 업무 자동화<br><span style="font-size:10px; color:#888888; line-height:16px; mso-line-height-rule:exactly;">DABs PPT 양식 정형화 → Copilot Agent 생성 → Agent 활용 → 결과 확인</span></td>
+          <td class="uc-dot-cell" style="text-align:center; font-size:15px; font-weight:700; width:7%; border:1px solid #CCCCCC; padding:8px 11px; vertical-align:middle; line-height:18px;"><span class="uc-dot-yes" style="color:#1e40af;">○</span></td>
+          <td class="uc-dot-cell" style="text-align:center; font-size:15px; font-weight:700; width:7%; border:1px solid #CCCCCC; padding:8px 11px; vertical-align:middle; line-height:18px;"><span class="uc-dot-yes" style="color:#1e40af;">○</span></td>
+          <td class="tag-cell" style="text-align:center; vertical-align:middle; border:1px solid #CCCCCC; padding:8px 11px; line-height:18px;"><span class="uc-op-tag dept" style="display:inline-block; font-size:10px; font-weight:700; padding:1px 6px; border-radius:2px; white-space:nowrap; background:#F3F0FF; color:#5B21B6; border:1px solid #C4B5FD; line-height:16px; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">부서 특화</span></td>
+        </tr>
+        <tr>
+          <td class="uc-sub-cell" style="vertical-align:middle; text-align:center; white-space:nowrap; background:#F8FAFC; font-size:11px; font-weight:700; color:#444; width:11%; border:1px solid #CCCCCC; padding:8px 11px; line-height:18px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">업무<br>R&amp;R정리</td>
+          <td style="padding:8px 11px; border:1px solid #CCCCCC; vertical-align:middle; color:#222; text-align:left; font-size:11.5px; line-height:18px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">Teams 회의 자동 요약 및 후속 조치·담당자 정리<br><span style="font-size:10px; color:#888888; line-height:16px; mso-line-height-rule:exactly;">Teams 회의 종료 후 Copilot 요약 탭 클릭 → 핵심 결정·담당자·기한 추출 → 후속 메일 초안 생성</span></td>
+          <td class="uc-dot-cell" style="text-align:center; font-size:15px; font-weight:700; width:7%; border:1px solid #CCCCCC; padding:8px 11px; vertical-align:middle; line-height:18px;"><span class="uc-dot-no" style="color:#c8cace; font-weight:400;">–</span></td>
+          <td class="uc-dot-cell" style="text-align:center; font-size:15px; font-weight:700; width:7%; border:1px solid #CCCCCC; padding:8px 11px; vertical-align:middle; line-height:18px;"><span class="uc-dot-yes" style="color:#1e40af;">○</span></td>
+          <td class="tag-cell" style="text-align:center; vertical-align:middle; border:1px solid #CCCCCC; padding:8px 11px; line-height:18px;"><span class="uc-op-tag common" style="display:inline-block; font-size:10px; font-weight:700; padding:1px 6px; border-radius:2px; white-space:nowrap; background:#EEF3FA; color:#003087; border:1px solid #B8CEF0; line-height:16px; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">전사 공통</span><br><span class="uc-op-tag paid-only" style="display:inline-block; font-size:10px; font-weight:700; padding:1px 6px; border-radius:2px; white-space:nowrap; background:#fff8e6; color:#a16207; border:1px solid #fcd97a; margin-top:3px; line-height:16px; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">유료 전용</span></td>
+        </tr>
+
+      </tbody>
+    </table></div>
+
+    <p class="inline-note" style="font-size:10.5px; color:#888888; padding-left:12px; position:relative; margin-top:8px; line-height:17px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">Copilot 무료계정 사례는 전직원이 누구나 따라할 수 있습니다. 유료계정 사례는 Teams·Outlook 연동 등 팀 공통 업무 효율을 높이는 데 활용합니다.</p>
+    <p class="inline-note" style="font-size:10.5px; color:#888888; padding-left:12px; position:relative; margin-top:4px; line-height:17px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;"><strong style="color:#003087; font-weight:700; line-height:17px;">전사 공통</strong> 유스케이스는 AI디자인랩이 발굴·정제하여 전사 배포하며, <strong style="color:#5B21B6; font-weight:700; line-height:17px;">부서 특화</strong> 유스케이스는 각 본부 ACE가 현장 특성에 맞게 발굴합니다.</p>
+  </div>
+
+  <div class="section-div" style="height:1px; background:#E0E0E0; margin:18px 0;"></div>
+
+  <!-- ── 라. 선순환 구조 ── -->
+  <div class="section" style="margin-bottom:22px;">
+    <div class="sec-title" style="font-size:13.5px; font-weight:700; color:#111; margin-bottom:10px; display:flex; align-items:center; gap:6px; line-height:22px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;"><span class="bar" style="display:inline-block; width:4px; height:15px; background:#003087; border-radius:2px; flex-shrink:0;"></span>라. 선순환 구조</div>
+    <div class="cycle-row" style="display:flex; gap:0; border:1px solid #CCCCCC; border-radius:3px; overflow:hidden;">
+      <div class="cycle-step" style="flex:1; padding:14px 12px; text-align:center; position:relative; font-size:11px; background:#F4F8FD; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">
+        <div class="cycle-icon" style="font-size:18px; margin-bottom:5px;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="3" width="16" height="18" rx="2" stroke="#0F4C9A" stroke-width="1.8" fill="#EEF3FA"/><line x1="8" y1="8" x2="16" y2="8" stroke="#0F4C9A" stroke-width="1.5" stroke-linecap="round"/><line x1="8" y1="12" x2="16" y2="12" stroke="#0F4C9A" stroke-width="1.5" stroke-linecap="round"/><line x1="8" y1="16" x2="13" y2="16" stroke="#0F4C9A" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <div class="cycle-title" style="font-size:11px; font-weight:700; color:#111; margin-bottom:3px; line-height:18px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">유스케이스 수신</div>
+        <div class="cycle-desc" style="font-size:10px; color:#555555; line-height:15px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">AI디자인랩·ACE가<br>월별 제공</div>
+      </div>
+      <div class="cycle-step" style="flex:1; padding:14px 12px; text-align:center; position:relative; font-size:11px; background:#FFFFFF; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">
+        <div class="cycle-icon" style="font-size:18px; margin-bottom:5px;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="5" width="20" height="13" rx="2" stroke="#0F4C9A" stroke-width="1.8" fill="#EEF3FA"/><line x1="10" y1="18" x2="14" y2="18" stroke="#0F4C9A" stroke-width="1.5" stroke-linecap="round"/><line x1="12" y1="18" x2="12" y2="21" stroke="#0F4C9A" stroke-width="1.5" stroke-linecap="round"/><circle cx="12" cy="11" r="2.5" stroke="#0F4C9A" stroke-width="1.5"/></svg></div>
+        <div class="cycle-title" style="font-size:11px; font-weight:700; color:#111; margin-bottom:3px; line-height:18px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">회의 직후 시연</div>
+        <div class="cycle-desc" style="font-size:10px; color:#555555; line-height:15px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">주간공정회의·팀회의·<br>보안교육 직후 5분</div>
+      </div>
+      <div class="cycle-step" style="flex:1; padding:14px 12px; text-align:center; position:relative; font-size:11px; background:#F4F8FD; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">
+        <div class="cycle-icon" style="font-size:18px; margin-bottom:5px;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="3" width="16" height="18" rx="2" stroke="#0F4C9A" stroke-width="1.8" fill="#EEF3FA"/><path d="M9 13l2 2 4-4" stroke="#0F4C9A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><line x1="8" y1="8" x2="16" y2="8" stroke="#0F4C9A" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <div class="cycle-title" style="font-size:11px; font-weight:700; color:#111; margin-bottom:3px; line-height:18px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">피드백 로그 제출</div>
+        <div class="cycle-desc" style="font-size:10px; color:#555555; line-height:15px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">시연 여부·반응·<br>건의 3항목</div>
+      </div>
+      <div class="cycle-step" style="flex:1; padding:14px 12px; text-align:center; position:relative; font-size:11px; background:#FFFFFF; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">
+        <div class="cycle-icon" style="font-size:18px; margin-bottom:5px;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 12a8 8 0 0 1 14-5.3" stroke="#0F4C9A" stroke-width="1.8" stroke-linecap="round"/><path d="M20 12a8 8 0 0 1-14 5.3" stroke="#0F4C9A" stroke-width="1.8" stroke-linecap="round"/><polyline points="17,3 18,7 14,7" stroke="#0F4C9A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="7,21 6,17 10,17" stroke="#0F4C9A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="cycle-title" style="font-size:11px; font-weight:700; color:#111; margin-bottom:3px; line-height:18px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">반영·재배포</div>
+        <div class="cycle-desc" style="font-size:10px; color:#555555; line-height:15px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">현장 피드백 기반<br>다음 유스케이스 개발</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-div" style="height:1px; background:#E0E0E0; margin:18px 0;"></div>
+
+  <!-- ── 마. 하지 않아도 되는 것 ── -->
+  <div class="section" style="margin-bottom:22px;">
+    <div class="sec-title" style="font-size:13.5px; font-weight:700; color:#111; margin-bottom:10px; display:flex; align-items:center; gap:6px; line-height:22px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;"><span class="bar" style="display:inline-block; width:4px; height:15px; background:#003087; border-radius:2px; flex-shrink:0;"></span>마. AI링커가 하지 않아도 되는 것</div>
+    <div class="notodo-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+      <div class="notodo-item" style="display:flex; gap:8px; align-items:flex-start; background:#F0F6FF; border:1px solid #C5D8F0; border-left:3px solid #0F4C9A; border-radius:3px; padding:10px 12px;">
+        <div class="notodo-x" style="width:17px; height:17px; background:#0F4C9A; border-radius:2px; color:#FFFFFF; font-size:9px; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:2px; line-height:17px;">◆</div>
+        <div class="notodo-txt" style="font-size:11px; color:#1a2a4a; line-height:18px; text-align:left; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">AI로 어려운 개발을 해야하는 것은 아닙니다. 제공받은 유스케이스를 직접 활용해보고 전파하면 됩니다.</div>
+      </div>
+      <div class="notodo-item" style="display:flex; gap:8px; align-items:flex-start; background:#F0F6FF; border:1px solid #C5D8F0; border-left:3px solid #0F4C9A; border-radius:3px; padding:10px 12px;">
+        <div class="notodo-x" style="width:17px; height:17px; background:#0F4C9A; border-radius:2px; color:#FFFFFF; font-size:9px; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:2px; line-height:17px;">◆</div>
+        <div class="notodo-txt" style="font-size:11px; color:#1a2a4a; line-height:18px; text-align:left; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">별도 시간을 잡아 교육을 기획하지 않아도 됩니다. 기존 회의 말미 5분이면 충분합니다.</div>
+      </div>
+      <div class="notodo-item" style="display:flex; gap:8px; align-items:flex-start; background:#F0F6FF; border:1px solid #C5D8F0; border-left:3px solid #0F4C9A; border-radius:3px; padding:10px 12px;">
+        <div class="notodo-x" style="width:17px; height:17px; background:#0F4C9A; border-radius:2px; color:#FFFFFF; font-size:9px; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:2px; line-height:17px;">◆</div>
+        <div class="notodo-txt" style="font-size:11px; color:#1a2a4a; line-height:18px; text-align:left; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">긴 보고서를 작성하지 않아도 됩니다. 로그 양식 1건, 5분으로 활동 실적이 인정됩니다.</div>
+      </div>
+      <div class="notodo-item" style="display:flex; gap:8px; align-items:flex-start; background:#F0F6FF; border:1px solid #C5D8F0; border-left:3px solid #0F4C9A; border-radius:3px; padding:10px 12px;">
+        <div class="notodo-x" style="width:17px; height:17px; background:#0F4C9A; border-radius:2px; color:#FFFFFF; font-size:9px; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:2px; line-height:17px;">◆</div>
+        <div class="notodo-txt" style="font-size:11px; color:#1a2a4a; line-height:18px; text-align:left; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">현장 문제를 직접 해결하지 않아도 됩니다. 니즈를 ACE에 전달하는 것이 역할의 끝입니다.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-div" style="height:1px; background:#E0E0E0; margin:18px 0;"></div>
+
+  <!-- ── 바. 선정 요청 및 일정 ── -->
+  <div class="section" style="margin-bottom:22px;">
+    <div class="sec-title" style="font-size:13.5px; font-weight:700; color:#111; margin-bottom:10px; display:flex; align-items:center; gap:6px; line-height:22px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;"><span class="bar" style="display:inline-block; width:4px; height:15px; background:#003087; border-radius:2px; flex-shrink:0;"></span>바. 선정 요청 사항 및 운영 일정</div>
+
+    <div class="sub-title" style="font-size:11.5px; font-weight:700; color:#0F4C9A; margin:14px 0 7px 0; line-height:19px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">1) 선정 요청</div>
+    <div class="req-table-wrapper"><table class="hd-table" style="width:100%; border-collapse:collapse; border-spacing:0; font-size:11.5px; margin-bottom:6px;">
+      <thead>
+        <tr>
+          <th style="background:#EEF3FA; color:#003087; font-weight:700; padding:8px 11px; border:1px solid #CCCCCC; text-align:center; vertical-align:middle; font-size:11px; line-height:18px; mso-line-height-rule:exactly; width:18%; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">구분</th>
+          <th style="background:#EEF3FA; color:#003087; font-weight:700; padding:8px 11px; border:1px solid #CCCCCC; text-align:center; vertical-align:middle; font-size:11px; line-height:18px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">내용</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="label" style="background:#F8FAFC; font-weight:700; color:#334; text-align:center; white-space:nowrap; width:18%; padding:8px 11px; border:1px solid #CCCCCC; vertical-align:middle; font-size:11.5px; line-height:18px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">선정 대상</td>
+          <td style="padding:8px 11px; border:1px solid #CCCCCC; vertical-align:middle; color:#222; text-align:left; font-size:11.5px; line-height:18px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">본사 팀별 1명 / 현장별 1명</td>
+        </tr>
+        <tr>
+          <td class="label" style="background:#F8FAFC; font-weight:700; color:#334; text-align:center; white-space:nowrap; width:18%; padding:8px 11px; border:1px solid #CCCCCC; vertical-align:middle; font-size:11.5px; line-height:18px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">선정 기준</td>
+          <td style="padding:8px 11px; border:1px solid #CCCCCC; vertical-align:middle; color:#222; text-align:left; font-size:11.5px; line-height:18px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">현업 이해도, 소통 역량, AI 활용 확산 의지가 있는 직원 (AI 전문성 무관)</td>
+        </tr>
+        <tr>
+          <td class="label" style="background:#F8FAFC; font-weight:700; color:#334; text-align:center; white-space:nowrap; width:18%; padding:8px 11px; border:1px solid #CCCCCC; vertical-align:middle; font-size:11.5px; line-height:18px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">선정 방식</td>
+          <td style="padding:8px 11px; border:1px solid #CCCCCC; vertical-align:middle; color:#222; text-align:left; font-size:11.5px; line-height:18px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">팀장·현장소장 추천 또는 직원 자원 (직책자 본인 선정 가능)</td>
+        </tr>
+        <tr>
+          <td class="label" style="background:#F8FAFC; font-weight:700; color:#334; text-align:center; white-space:nowrap; width:18%; padding:8px 11px; border:1px solid #CCCCCC; vertical-align:middle; font-size:11.5px; line-height:18px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">제출 기한</td>
+          <td style="padding:8px 11px; border:1px solid #CCCCCC; vertical-align:middle; color:#222; text-align:left; font-size:11.5px; line-height:18px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;"><strong style="font-weight:700; line-height:18px;">4/24(금)</strong> — <a href="https://o365hdec.sharepoint.com/:l:/s/RJAT-02/JACTsZCrptOVRJWYdLFlO0FNAZQjN7XmbsCsWkmYu4_UsgU?nav=YzMzMjIyZDQtZjJmNS00ZDU5LWI0NDMtN2Y2MzkzY2JkMTMx" target="_blank" rel="noopener noreferrer" style="color:#0F4C9A; text-decoration:none; line-height:18px; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">선정결과 양식 작성 후 제출</a></td>
+        </tr>
+        <tr>
+          <td class="label" style="background:#F8FAFC; font-weight:700; color:#334; text-align:center; white-space:nowrap; width:18%; padding:8px 11px; border:1px solid #CCCCCC; vertical-align:middle; font-size:11.5px; line-height:18px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">지원 사항</td>
+          <td style="padding:8px 11px; border:1px solid #CCCCCC; vertical-align:middle; color:#222; text-align:left; font-size:11.5px; line-height:18px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">Copilot 유료계정 우선 배정 — 시연 주도구로 활용하며, <strong style="font-weight:700; line-height:18px;">Teams·Outlook 연동 등 팀 공통 업무 효율 향상에 사용</strong></td>
+        </tr>
+      </tbody>
+    </table></div>
+
+    <div class="sub-title" style="font-size:11.5px; font-weight:700; color:#0F4C9A; margin:14px 0 7px 0; line-height:19px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">2) 운영 일정</div>
+    <div class="timeline-line" style="font-size:12px; font-weight:700; color:#111; padding:10px 14px; background:#F4F8FD; border:1px solid #C5D8F0; border-radius:3px; line-height:24px; text-align:left; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">
+      [4월 3주차] AI링커 선정
+      <span class="arr" style="color:#0F4C9A; margin:0 6px; line-height:24px;">→</span>
+      [5월 1주차] Copilot 유료계정 배포
+      <span class="arr" style="color:#0F4C9A; margin:0 6px; line-height:24px;">→</span>
+      [5월 이후] AI링커 활동 수행
+    </div>
+  </div>
+
+  <div class="section-div" style="height:1px; background:#E0E0E0; margin:18px 0;"></div>
+
+  <!-- ── 사. 협조 요청 ── -->
+  <div class="section" style="margin-bottom:22px;">
+    <div class="sec-title" style="font-size:13.5px; font-weight:700; color:#111; margin-bottom:10px; display:flex; align-items:center; gap:6px; line-height:22px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;"><span class="bar" style="display:inline-block; width:4px; height:15px; background:#003087; border-radius:2px; flex-shrink:0;"></span>사. 협조 요청 사항</div>
+    <ul class="req-list" style="padding-left:0; list-style:none;">
+      <li style="font-size:12px; font-weight:700; color:#111; padding:4px 0 4px 16px; position:relative; line-height:20px; text-align:left; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">AI링커 활동 시간 보장 <span style="font-size:10.5px; font-weight:400; color:#888888; line-height:20px; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">(정기 회의 말미 5분 시연 + 로그 작성 시간 포함)</span></li>
+      <li style="font-size:12px; font-weight:700; color:#111; padding:4px 0 4px 16px; position:relative; line-height:20px; text-align:left; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">팀장·현장소장의 주기적인 AI링커 활동 점검 <span style="font-size:10.5px; font-weight:400; color:#888888; line-height:20px; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">(매월 피드백 로그 제출 여부 및 시연 이행 현황 확인, 분기별 점검표 제공 예정)</span></li>
+      <li style="font-size:12px; font-weight:700; color:#111; padding:4px 0 4px 16px; position:relative; line-height:20px; text-align:left; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">담당자 변경 시 계정·자료 누락 없는 이관</li>
+    </ul>
+    <br>
+    <p class="body-text" style="font-size:12px; color:#333; line-height:22px; margin:0 0 10px 0; text-align:left; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">
+      AI링커는 팀·현장에서 <strong style="font-weight:700; line-height:22px;">주어진 유스케이스를 정기 회의 직후 전파하고, 현장 반응을 피드백 로그로 남기는</strong> 실행 거점입니다.
+      담당자 선정과 더불어 AI링커가 실제로 활동할 수 있도록 각 팀장·현장소장님의 적극적인 관심과 지원을 부탁드립니다.
+    </p>
+  </div>
+
+  <!-- ── 푸터 ── -->
+  <div class="hd-footer" style="margin-top:28px; padding-top:12px; border-top:1px solid #BBBBBB; display:flex; justify-content:space-between; align-items:flex-end;">
+    <div class="footer-attach" style="font-size:11px; color:#333; line-height:22px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">
+      <a href="https://o365hdec.sharepoint.com/:u:/s/PlayGround9/IQDzGB4reDL4RILkKlRTqr5hAcP0FSu4M102vm8ylkeEuhQ?e=Da31jA" style="color:#0F4C9A; text-decoration:none; line-height:22px; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">첨부 1. AI링커 실무지침서 1부</a>
+    </div>
+    <div class="footer-end" style="font-size:12px; font-weight:700; color:#111; line-height:20px; mso-line-height-rule:exactly; font-family:'Noto Sans KR','Malgun Gothic',sans-serif;">끝.</div>
+  </div>
+
+</div>
+</body>
+</html>
