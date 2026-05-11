@@ -229,28 +229,87 @@
     }
 
     .cta {
+      position: relative;
       display: inline-flex;
       align-items: center;
       gap: 14px;
       min-height: 64px;
       padding: 0 clamp(20px, 3.5vw, 32px);
-      border: 2px solid var(--violet-line);
+      border: none;
       border-radius: 40px;
-      background: #fff;
-      color: var(--violet-deep);
+      background: linear-gradient(135deg, #5326e0 0%, #3210b7 50%, #1f4cd9 100%);
+      background-size: 200% 200%;
+      color: #ffffff;
       font-size: clamp(16px, 2vw, 22px);
       font-weight: 800;
       letter-spacing: -0.045em;
-      box-shadow: 0 6px 16px rgba(43, 22, 150, 0.07);
-      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+      box-shadow:
+        0 8px 20px rgba(83, 38, 224, 0.35),
+        0 0 0 0 rgba(83, 38, 224, 0.5);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      animation: ctaPulse 2.4s ease-in-out infinite, ctaGradient 4s ease infinite;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    /* 그라데이션 흐름 애니메이션 */
+    @keyframes ctaGradient {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* 펄스(글로우) 애니메이션 - 시선을 끄는 효과 */
+    @keyframes ctaPulse {
+      0%, 100% {
+        box-shadow:
+          0 8px 20px rgba(83, 38, 224, 0.35),
+          0 0 0 0 rgba(83, 38, 224, 0.55);
+      }
+      50% {
+        box-shadow:
+          0 12px 28px rgba(83, 38, 224, 0.45),
+          0 0 0 14px rgba(83, 38, 224, 0);
+      }
+    }
+
+    /* 빛 반짝임(shine) 효과 - 버튼 위로 흐르는 광택 */
+    .cta::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -75%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(
+        120deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.0) 20%,
+        rgba(255, 255, 255, 0.45) 50%,
+        rgba(255, 255, 255, 0.0) 80%,
+        transparent 100%
+      );
+      transform: skewX(-20deg);
+      animation: ctaShine 3.2s ease-in-out infinite;
+      pointer-events: none;
+      z-index: 1;
+    }
+    @keyframes ctaShine {
+      0%   { left: -75%; }
+      60%  { left: 125%; }
+      100% { left: 125%; }
     }
 
     .cta:hover {
-      transform: translateY(-2px);
-      border-color: #9a82f0;
-      box-shadow: 0 14px 28px rgba(43, 22, 150, 0.14);
-      background: #faf8ff;
+      transform: translateY(-3px) scale(1.03);
+      box-shadow:
+        0 18px 36px rgba(83, 38, 224, 0.50),
+        0 0 0 6px rgba(83, 38, 224, 0.15);
+      animation-play-state: paused, paused;
     }
+
+    /* badge, 텍스트, arrow는 shine 위에 보이도록 z-index */
+    .cta > * { position: relative; z-index: 2; }
 
     .cta .badge {
       display: grid;
@@ -258,22 +317,30 @@
       width: 40px;
       height: 40px;
       border-radius: 999px;
-      background: linear-gradient(135deg, #3010b7, #6c40e9);
-      color: #fff;
+      background: rgba(255, 255, 255, 0.22);
+      backdrop-filter: blur(4px);
+      color: #ffffff;
       font-size: 18px;
       flex: 0 0 auto;
-      transition: transform 0.3s ease;
+      transition: transform 0.3s ease, background 0.3s ease;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.25);
     }
-    .cta:hover .badge { transform: scale(1.1) rotate(-6deg); }
+    .cta:hover .badge {
+      transform: scale(1.12) rotate(-6deg);
+      background: rgba(255, 255, 255, 0.32);
+    }
 
     .cta .badge.doc {
-      background: transparent;
-      color: var(--violet-deep);
+      background: rgba(255, 255, 255, 0.22);
+      color: #ffffff;
       font-size: 26px;
     }
-    .cta:hover .badge.doc { transform: translateY(-2px) rotate(-4deg); }
+    .cta:hover .badge.doc {
+      transform: translateY(-2px) rotate(-4deg) scale(1.08);
+      background: rgba(255, 255, 255, 0.32);
+    }
 
-    .cta .small { font-size: 0.78em; font-weight: 700; margin-left: 2px; opacity: 0.85; }
+    .cta .small { font-size: 0.78em; font-weight: 700; margin-left: 2px; opacity: 0.92; }
 
     .arrow {
       width: 12px;
@@ -283,11 +350,18 @@
       transform: rotate(45deg);
       margin-left: 6px;
       border-radius: 2px;
-      opacity: 0.85;
+      opacity: 0.95;
       flex: 0 0 auto;
       transition: transform 0.25s ease, margin-left 0.25s ease;
     }
     .cta:hover .arrow { transform: rotate(45deg) translate(2px, -2px); margin-left: 10px; }
+
+    /* 두 번째 버튼(설명자료)은 시선이 분산되도록 살짝 다른 톤 + 애니메이션 타이밍 오프셋 */
+    .button-row .cta:nth-child(2) {
+      background: linear-gradient(135deg, #1f4cd9 0%, #3210b7 50%, #5326e0 100%);
+      background-size: 200% 200%;
+      animation-delay: -1.2s, -2s;
+    }
 
     /* ───── 역할 카드 리스트 ───── */
     .role-list {
